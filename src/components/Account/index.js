@@ -36,7 +36,7 @@ const AccountPage = () => (
         <h1>Account: {authUser.email}</h1>
         <PasswordForgetForm />
         <PasswordChangeForm />
-        <LoginManagement authUser={authUser} />
+        {/*<LoginManagement authUser={authUser} />*/}
       </div>
     )}
   </AuthUserContext.Consumer>
@@ -96,7 +96,7 @@ class LoginManagementBase extends Component {
 
     return (
       <div>
-        Sign In Methods:
+        <h1>Sign in methods</h1>
         <ul>
           {SIGN_IN_METHODS.map(signInMethod => {
             const onlyOneLeft = activeSignInMethods.length === 1;

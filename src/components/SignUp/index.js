@@ -32,6 +32,10 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `;
 
+const ERROR_MSG_USERNAME_EXISTS = `
+ Ce pseudo est déjà utilisé
+`;
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +71,8 @@ class SignUpFormBase extends Component {
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        } else if (error.code === ERROR_MSG_USERNAME_EXISTS) {
+            error.message = ERROR_MSG_USERNAME_EXISTS;
         }
 
         this.setState({ error });
@@ -106,7 +112,7 @@ class SignUpFormBase extends Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="Full Name"
+          placeholder="Pseudo"
         />
         <input
           name="email"

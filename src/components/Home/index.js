@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import { withFirebase } from '../Firebase';
-import Messages from '../Messages';
+// import Messages from '../Messages';
 
 class HomePage extends Component {
   constructor(props) {
@@ -31,8 +31,7 @@ class HomePage extends Component {
       <div>
         <h1>Home Page</h1>
         <p>The Home Page is accessible by every signed in user.</p>
-
-        <Messages users={this.state.users} />
+        {/*<Messages users={this.state.users} />*/}
       </div>
     );
   }

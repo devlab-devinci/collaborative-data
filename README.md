@@ -43,7 +43,7 @@ If you want to use this starter project to develop commercial sites, themes, pro
 * [Team of up to 8 Developers](https://gum.co/react-with-firebase-starter-pack-team)
 * [Unlimited Developers of an Organization](https://gum.co/react-with-firebase-starter-pack-organization)
 
-It grants you also access to the other starter projects in this GitHub organization.
+It grants you also access to the other starter projects in this GitHub organization
 
 ### Open source license
 

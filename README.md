@@ -51,7 +51,6 @@ If you are creating an open source application under a license compatible with t
 
 ## Installation
 
-* `git clone git@github.com:the-road-to-react-with-firebase/react-firebase-authentication.git`
 * `cd react-firebase-authentication`
 * `npm install`
 * `npm start`

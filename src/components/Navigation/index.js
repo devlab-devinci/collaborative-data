@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -29,7 +28,7 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
-    {authUser.roles.includes(ROLES.ADMIN) && (
+    {authUser.admin === true && (
       <li>
         <Link to={ROUTES.ADMIN}>Admin</Link>
       </li>

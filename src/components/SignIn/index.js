@@ -9,7 +9,7 @@ import * as ROUTES from '../../constants/routes';
 
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
+    <h1>Se connecter</h1>
     <SignInForm />
     {/*<SignInGoogle />*/}
     {/*<SignInFacebook />*/}
@@ -74,17 +74,17 @@ class SignInFormBase extends Component {
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder="Email"
         />
         <input
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
         />
         <button disabled={isInvalid} type="submit">
-          Sign In
+          Se connecter
         </button>
 
         {error && <p>{error.message}</p>}

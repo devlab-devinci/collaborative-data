@@ -9,6 +9,8 @@ import {
 import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
+import BecomeContributor from '../BecomeContributor';
+
 
 const SIGN_IN_METHODS = [
   {
@@ -37,6 +39,7 @@ const AccountPage = () => (
         <PasswordForgetForm />
         <PasswordChangeForm />
         {/*<LoginManagement authUser={authUser} />*/}
+        <BecomeContributor authUser={authUser}/>
       </div>
     )}
   </AuthUserContext.Consumer>

@@ -4,11 +4,10 @@ import {compose} from 'recompose';
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 
 const SignUpPage = () => (
     <div>
-        <h1>SignUp</h1>
+        <h1>Se créer un compte</h1>
         <SignUpForm/>
     </div>
 );
@@ -19,41 +18,24 @@ const INITIAL_STATE = {
     email: '',
     passwordOne: '',
     passwordTwo: '',
-    isAdmin: false,
+    admin : false,
     error: null,
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
-  An account with this E-Mail address already exists.
-  Try to login with this account instead. If you think the
-  account is already used from one of the social logins, try
-  to sign in with one of them. Afterward, associate your accounts
-  on your personal account page. 
-`;
-
-const ERROR_MSG_USERNAME_EXISTS = `
- Ce pseudo est déjà utilisé
+  Un compte utilisant cette adresse mail existe déjà 
 `;
 
 class SignUpFormBase extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
-
         this.state = {...INITIAL_STATE};
     }
 
-    // TODO : séparer la validation du formulaire en 2, une fois que les champs sont tous bons alors faire le call firebase
     onSubmit = event => {
-        const {username, isUsernameTaken, email, passwordOne, isAdmin} = this.state;
-
-        const roles = [];
-
-        if (isAdmin) {
-            roles.push(ROLES.ADMIN);
-        }
+        const {username, email, passwordOne, admin} = this.state;
 
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -62,7 +44,7 @@ class SignUpFormBase extends Component {
                 return this.props.firebase.user(authUser.user.uid).set({
                     username,
                     email,
-                    roles,
+                    admin,
                 });
             })
             .then(() => {
@@ -73,12 +55,10 @@ class SignUpFormBase extends Component {
                 this.props.history.push(ROUTES.HOME);
             })
             .catch(error => {
+                console.log(error);
                 if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
                     error.message = ERROR_MSG_ACCOUNT_EXISTS;
-                } else if (error.code === ERROR_MSG_USERNAME_EXISTS) {
-                    error.message = ERROR_MSG_USERNAME_EXISTS;
                 }
-
                 this.setState({error});
             });
 
@@ -107,7 +87,7 @@ class SignUpFormBase extends Component {
             email,
             passwordOne,
             passwordTwo,
-            isAdmin,
+            admin,
             error,
         } = this.state;
 
@@ -138,33 +118,33 @@ class SignUpFormBase extends Component {
                     value={email}
                     onChange={this.onChange}
                     type="text"
-                    placeholder="Email Address"
+                    placeholder="Email"
                 />
                 <input
                     name="passwordOne"
                     value={passwordOne}
                     onChange={this.onChange}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mot de passe"
                 />
                 <input
                     name="passwordTwo"
                     value={passwordTwo}
                     onChange={this.onChange}
                     type="password"
-                    placeholder="Confirm Password"
+                    placeholder="Confirmation du mot de passe"
                 />
                 <label>
                     Admin:
                     <input
-                        name="isAdmin"
+                        name="admin"
                         type="checkbox"
-                        checked={isAdmin}
+                        checked={admin}
                         onChange={this.onChangeCheckbox}
                     />
                 </label>
                 <button disabled={isInvalid} type="submit">
-                    Sign Up
+                    Se créer un compte
                 </button>
                 {error && <p>{error.message}</p>}
             </form>
@@ -174,7 +154,7 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
     <p>
-        Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+        Pas encore de compte ? <Link to={ROUTES.SIGN_UP}>Se créer un compte</Link>
     </p>
 );
 

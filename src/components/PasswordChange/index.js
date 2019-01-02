@@ -47,17 +47,17 @@ class PasswordChangeForm extends Component {
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeholder="New Password"
+          placeholder="Nouveau mot de passe"
         />
         <input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeholder="Confirm New Password"
+          placeholder="Confirmer mot de passe"
         />
         <button disabled={isInvalid} type="submit">
-          Reset My Password
+          Réinitialiser mon mot de passe
         </button>
 
         {error && <p>{error.message}</p>}

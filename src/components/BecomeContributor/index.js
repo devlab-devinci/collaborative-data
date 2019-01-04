@@ -18,7 +18,7 @@ const MSG_ACCEPTED_CONTRIBUTOR = "Vous êtes déjà contributeur ! Félicitation
 class BecomeContributorBase extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        // console.log(this.props)
 
         this.state = { ...INITIAL_STATE };
     }
@@ -62,7 +62,7 @@ class BecomeContributorBase extends Component {
 
         return (
             <div>
-                {console.log(contributor)}
+                {/*{console.log(contributor)}*/}
                 {contributor === null
                   ? <button onClick={this.onClick} type="submit">
                     Je souhaite devenir contributeur (et gagner des tokens !)

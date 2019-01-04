@@ -37,6 +37,11 @@ class SignUpFormBase extends Component {
     onSubmit = event => {
         const {username, email, passwordOne, admin} = this.state;
 
+        let contributor;
+        if(admin) {
+            contributor = "accepted";
+        }
+
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
@@ -45,6 +50,7 @@ class SignUpFormBase extends Component {
                     username,
                     email,
                     admin,
+                    contributor
                 });
             })
             .then(() => {

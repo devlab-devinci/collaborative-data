@@ -31,8 +31,6 @@ const ProposePage = () => (
 );
 
 const INITIAL_STATE = {
-    offerType : 'Mobile',
-    selectedFields : {},
     error: ''
 };
 
@@ -43,71 +41,50 @@ class ProposeFormBase extends Component {
         this.state = {...INITIAL_STATE};
     }
 
-    onSubmit(values) {
-        console.log( values);
-        return event => {
-            console.log( event);
-            // if (values.username !== "erikras") {
-            //     return { username: "Unknown username" };
-            // }
-            // if (values.password !== "finalformrocks") {
-            //     return { [FORM_ERROR]: "Login Failed" };
-            // }
-            // window.alert("LOGIN SUCCESS!");
-            // const {username, email, passwordOne, admin} = this.state;
-
-            // this.props.firebase
-            //     .doCreateUserWithEmailAndPassword(email, passwordOne)
-            //     .then(authUser => {
-            //         // Create a user in your Firebase realtime database
-            //         return this.props.firebase.user(authUser.user.uid).set({
-            //             username,
-            //             email,
-            //             admin,
-            //         });
-            //     })
-            //     .then(() => {
-            //         return this.props.firebase.doSendEmailVerification();
-            //     })
-            //     .then(() => {
-            //         this.setState({...INITIAL_STATE});
-            //         this.props.history.push(ROUTES.HOME);
-            //     })
-            //     .catch(error => {
-            //         console.log(error);
-            //         this.setState({error});
-            //     });
-            event.preventDefault();
-        };
-    }
-
-    onChange = event => {
-        this.setState({offerType: event.target.value});
-        console.log(this.state.offerType);
+    onSubmit = (values, event) => {
+        // this.props.firebase
+        //     .doCreateUserWithEmailAndPassword(email, passwordOne)
+        //     .then(authUser => {
+        //         // Create a user in your Firebase realtime database
+        //         return this.props.firebase.user(authUser.user.uid).set({
+        //             username,
+        //             email,
+        //             admin,
+        //         });
+        //     })
+        //     .then(() => {
+        //         return this.props.firebase.doSendEmailVerification();
+        //     })
+        //     .then(() => {
+        //         this.setState({...INITIAL_STATE});
+        //         this.props.history.push(ROUTES.HOME);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         this.setState({error});
+        //     });
+        event.preventDefault();
     };
 
-    render() {
-        const {offerType, selectedFields, error} = this.state;
+    validate = values => {
+        this.setState({valuesJson : values});
+        const errors = {};
 
+        if (!values.title) {
+            errors.title = "Obligatoire";
+        }
+        if (!values.offerType) {
+            errors.offerType = "Obligatoire";
+        }
+        return errors;
+    };
+
+        render() {
         return (
             <Form
                 onSubmit={this.onSubmit}
-                validate={values => {
-                    const errors = {};
-                    if (!values.title) {
-                        errors.title = "Obligatoire";
-                    }
-                    if (!values.link) {
-                    }
-                    if (!values.age) {
-                        errors.age = "Required";
-                    } else if (isNaN(values.age)) {
-                        errors.age = "Must be a number";
-                    } else if (values.age < 18) {
-                        errors.age = "No kids allowed";
-                    }
-                    return errors;
-                }}
+                validate={this.validate}
+                initialValues={{ offerType : "mobile"}}
                 render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                         <h3> 1) Dis-nous en plus sur l'offre :</h3>
@@ -145,10 +122,10 @@ class ProposeFormBase extends Component {
                         </Field>
 
                         <Field name="description" component="textarea">
-                            {({ textarea, meta }) => (
+                            {({ input, meta }) => (
                                 <div>
                                     <label>Description</label>
-                                    <textarea {...textarea} type="text" placeholder="Description" />
+                                    <textarea {...input} placeholder="Description" />
                                     {(meta.error || meta.submitError) &&
                                     meta.touched && <span>{meta.error || meta.submitError}</span>}
                                 </div>
@@ -156,15 +133,22 @@ class ProposeFormBase extends Component {
                         </Field>
 
                         <h3>2) Sélectionne un type d'offre :</h3>
-                            <select value={offerType} onChange={this.onChange}>
-                                <option value="Mobile">Mobile</option>
-                                <option value="lime">Lime</option>
-                                <option value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                            </select>
 
-                        {offerType === 'Mobile' &&
-                            <h3>3) Définis les critères de l'offre :</h3>
+                        <div>
+                            <label>Type d'offre</label>
+                            <Field name="offerType" component="select">
+                                <option value="mobile" >Mobile</option>
+                                <option value="internet">Internet</option>
+                                <option value="gas">Gaz</option>
+                                <option value="electricity">Électricité</option>
+                                <option value="medias">Médias</option>
+                            </Field>
+                        </div>
+
+                        {console.log(values)}
+                        <h3>3) Définis les critères de l'offre :</h3>
+                        {values.offerType === 'mobile' &&
+                            <Mobile/>
                         }
                         <p>Les champs obligatoires sont signalés par un astérix</p>
 

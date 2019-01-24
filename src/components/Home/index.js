@@ -3,15 +3,13 @@ import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import { withFirebase } from '../Firebase';
-// import Messages from '../Messages';
+import { withAlert } from 'react-alert';
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
-    this.state = {
-      users: null,
-    };
   }
 
   componentDidMount() {
@@ -20,6 +18,9 @@ class HomePage extends Component {
         users: snapshot.val(),
       });
     });
+    if(this.props.location.state) {
+        this.props.alert.show(this.props.location.state.alert)
+    }
   }
 
   componentWillUnmount() {
@@ -29,9 +30,6 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <h1>Home Page</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
-        {/*<Messages users={this.state.users} />*/}
       </div>
     );
   }
@@ -43,4 +41,5 @@ export default compose(
   withFirebase,
   withEmailVerification,
   withAuthorization(condition),
+  withAlert
 )(HomePage);

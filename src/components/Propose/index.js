@@ -3,10 +3,9 @@ import {Link, withRouter} from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import Styles from './Styles';
 import {compose} from 'recompose';
+
 import {
     AuthUserContext,
-    withAuthorization,
-    withEmailVerification,
 } from '../Session';
 
 import {withFirebase} from '../Firebase';
@@ -17,14 +16,16 @@ const ProposePage = () => (
     <Styles>
         <AuthUserContext.Consumer>
             {authUser =>
-                authUser.contributor === 'accepted' ? (
-                    <div>
-                        <h1>Proposer une offre</h1>
-                        <ProposeForm authUser={authUser}/>
-                    </div>
-                ) : (
-                    <h1><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
-                )
+                authUser ?
+                    authUser.contributor === 'accepted' ? (
+                        <div>
+                            <h1>Proposer une offre</h1>
+                            <ProposeForm authUser={authUser}/>
+                        </div>
+                    ) : (
+                        <h1><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
+                    )
+                : <h1><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
             }
         </AuthUserContext.Consumer>
     </Styles>
@@ -42,36 +43,34 @@ class ProposeFormBase extends Component {
     }
 
     onSubmit = (values, event) => {
-        // this.props.firebase
-        //     .doCreateUserWithEmailAndPassword(email, passwordOne)
-        //     .then(authUser => {
-        //         // Create a user in your Firebase realtime database
-        //         return this.props.firebase.user(authUser.user.uid).set({
-        //             username,
-        //             email,
-        //             admin,
-        //         });
-        //     })
-        //     .then(() => {
-        //         return this.props.firebase.doSendEmailVerification();
-        //     })
-        //     .then(() => {
-        //         this.setState({...INITIAL_STATE});
-        //         this.props.history.push(ROUTES.HOME);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         this.setState({error});
-        //     });
-        event.preventDefault();
+        console.log("on submit"+JSON.stringify(values,0,2));
+        console.log(event);
+        this.props.firebase.offer().push({
+                idUser : this.props.authUser.uid,
+                values
+            })
+            .then(() => {
+                this.setState({...INITIAL_STATE});
+                this.props.history.push(
+                    {
+                        pathname : ROUTES.HOME,
+                        state : { alert : 'Votre annonce a été enregistrée, elle est en cours de validation par les administrateurs'}
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({error});
+            });
     };
 
     validate = values => {
-        this.setState({valuesJson : values});
         const errors = {};
 
         if (!values.title) {
             errors.title = "Obligatoire";
+        }
+        if (!values.offerType) {
+            errors.offerType = "Obligatoire";
         }
         if (!values.offerType) {
             errors.offerType = "Obligatoire";
@@ -84,58 +83,71 @@ class ProposeFormBase extends Component {
             <Form
                 onSubmit={this.onSubmit}
                 validate={this.validate}
-                initialValues={{ offerType : "mobile"}}
+                initialValues={{
+                    title : null,
+                    link : null,
+                    promo : null,
+                    description : null,
+                    offerType : "mobile",
+                    operator : "free",
+                    dataVolume : "20",
+                    commitment : "0",
+                    phone : "false",
+                    calls : "0",
+                    foreign : "true"
+                }}
                 render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                         <h3> 1) Dis-nous en plus sur l'offre :</h3>
+
                         <Field name="title">
                             {({ input, meta }) => (
-                                <div>
+                                <div className='row-form'>
                                     <label>Titre *</label>
                                     <input {...input} type="text" placeholder="Titre" />
                                     {(meta.error || meta.submitError) &&
-                                    meta.touched && <span>{meta.error || meta.submitError}</span>}
+                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
                                 </div>
                             )}
                         </Field>
 
                         <Field name="link">
                             {({ input, meta }) => (
-                                <div>
+                                <div className='row-form'>
                                     <label>Lien</label>
                                     <input {...input} type="text" placeholder="Lien vers l'offre" />
                                     {(meta.error || meta.submitError) &&
-                                    meta.touched && <span>{meta.error || meta.submitError}</span>}
+                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
                                 </div>
                             )}
                         </Field>
 
                         <Field name="promo">
                             {({ input, meta }) => (
-                                <div>
+                                <div className='row-form'>
                                     <label>Code promotionnel</label>
                                     <input {...input} type="text" placeholder="Code promotionnel" />
                                     {(meta.error || meta.submitError) &&
-                                    meta.touched && <span>{meta.error || meta.submitError}</span>}
+                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
                                 </div>
                             )}
                         </Field>
 
                         <Field name="description" component="textarea">
                             {({ input, meta }) => (
-                                <div>
+                                <div className='row-form'>
                                     <label>Description</label>
                                     <textarea {...input} placeholder="Description" />
                                     {(meta.error || meta.submitError) &&
-                                    meta.touched && <span>{meta.error || meta.submitError}</span>}
+                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
                                 </div>
                             )}
                         </Field>
 
                         <h3>2) Sélectionne un type d'offre :</h3>
 
-                        <div>
-                            <label>Type d'offre</label>
+                        <div className='row-form'>
+                            <label>Type d'offre *</label>
                             <Field name="offerType" component="select">
                                 <option value="mobile" >Mobile</option>
                                 <option value="internet">Internet</option>

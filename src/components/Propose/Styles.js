@@ -57,8 +57,9 @@ export default styled.div`
     padding: 20px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
+    }
 
-    & > div {
+     div.row-form {
       display: flex;
       flex-flow: row nowrap;
       line-height: 2em;
@@ -92,7 +93,7 @@ export default styled.div`
           }
         }
       }
-      & > span {
+      & > span.error {
         line-height: 32px;
         margin-left: 10px;
         color: #800;

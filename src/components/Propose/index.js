@@ -25,7 +25,7 @@ const ProposePage = () => (
                     ) : (
                         <h1><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
                     )
-                : <h1><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
+                    : <h1><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
             }
         </AuthUserContext.Consumer>
     </Styles>
@@ -44,11 +44,12 @@ class ProposeFormBase extends Component {
 
     onSubmit = (values, event) => {
         console.log("on submit"+JSON.stringify(values,0,2));
-        console.log(event);
         this.props.firebase.offer().push({
-                idUser : this.props.authUser.uid,
-                values
-            })
+            idUser : this.props.authUser.uid,
+            created_at : Date.now(),
+            status : "pending",
+            values
+        })
             .then(() => {
                 this.setState({...INITIAL_STATE});
                 this.props.history.push(
@@ -78,7 +79,7 @@ class ProposeFormBase extends Component {
         return errors;
     };
 
-        render() {
+    render() {
         return (
             <Form
                 onSubmit={this.onSubmit}
@@ -160,7 +161,7 @@ class ProposeFormBase extends Component {
                         {console.log(values)}
                         <h3>3) Définis les critères de l'offre :</h3>
                         {values.offerType === 'mobile' &&
-                            <Mobile/>
+                        <Mobile/>
                         }
                         <p>Les champs obligatoires sont signalés par un astérix</p>
 

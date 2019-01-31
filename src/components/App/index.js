@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom';
 
 import Navigation from '../Navigation';
 import SignUpPage from '../SignUp';
@@ -20,7 +20,9 @@ const App = () => (
       <Navigation />
 
       <hr />
-
+      <Route exact path="/" render={() => (
+          <Redirect from="" to="/home" />
+      )}/>
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.SIGN_OUT} component={SignOutPage} />

@@ -48,7 +48,7 @@ class ProposeFormBase extends Component {
             idUser : this.props.authUser.uid,
             created_at : Date.now(),
             status : "pending",
-            values
+            ...values
         })
             .then(() => {
                 this.setState({...INITIAL_STATE});
@@ -85,10 +85,10 @@ class ProposeFormBase extends Component {
                 onSubmit={this.onSubmit}
                 validate={this.validate}
                 initialValues={{
-                    title : null,
-                    link : null,
-                    promo : null,
-                    description : null,
+                    title : "",
+                    link : "",
+                    promo : "",
+                    description : "",
                     offerType : "mobile",
                     operator : "free",
                     dataVolume : "20",

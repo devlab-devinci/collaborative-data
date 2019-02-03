@@ -2,9 +2,10 @@ import React from "react";
 
 import { AuthUserContext } from "../Session";
 import * as ROUTES from "../../constants/routes";
-import {Nav, NavItem} from "react-bootstrap";
+import {Nav, Navbar, NavItem} from "react-bootstrap";
 
 const Navigation = () => (
+
     <AuthUserContext.Consumer>
         {authUser =>
             authUser ? (
@@ -18,45 +19,34 @@ const Navigation = () => (
 
 const NavigationAuth = ({ authUser }) => (
 
-    <Nav
-    >
-        <Nav.Item>
-            <Nav.Link href={ROUTES.HOME}>Accueil</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link href={ROUTES.ACCOUNT}>Mon compte</Nav.Link>
-        </Nav.Item>
-        {authUser.admin === true && (
-        <NavItem>
-            <Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link>
-        </NavItem>
-        )}
-        <NavItem href={ROUTES.SIGN_OUT}>
-            <Nav.Link href={ROUTES.SIGN_OUT}>Déconnexion</Nav.Link>
-        </NavItem>
-    </Nav>
+    <Navbar bg="primary" expand="lg" variant="dark" collapseOnSelect>
+        <Navbar.Brand href={ROUTES.HOME}>Accueil</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-end">
+                <Nav.Link href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
+                <Nav.Link href={ROUTES.ACCOUNT}>Mon compte</Nav.Link>
+                {authUser.admin === true && (
+                <Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link>
+                )}
+                <Nav.Link href={ROUTES.SIGN_OUT}>Déconnexion</Nav.Link>
+            </Nav>
+        </Navbar.Collapse>
+    </Navbar>
 );
 
 const NavigationNonAuth = () => (
-    <Nav
-    >
-        <Nav.Item>
-            <Nav.Link href={ROUTES.HOME}>Accueil</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link eventKey="link-1" href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link eventKey="link-2" href={ROUTES.SIGN_UP}>S'inscrire</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-            <Nav.Link eventKey="link-3" href={ROUTES.SIGN_IN}>Se connecter</Nav.Link>
-        </Nav.Item>
-    </Nav>
-
+    <Navbar bg="primary" expand="lg" variant="dark" collapseOnSelect>
+      <Navbar.Brand href={ROUTES.HOME}>Accueil</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-end">
+                <Nav.Link href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
+                <Nav.Link href={ROUTES.SIGN_UP}>S'inscrire</Nav.Link>
+                <Nav.Link href={ROUTES.SIGN_IN}>Se connecter</Nav.Link>
+            </Nav>
+        </Navbar.Collapse>
+    </Navbar>
 );
 
 export default Navigation;

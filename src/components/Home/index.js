@@ -21,33 +21,36 @@ class HomePage extends Component {
 
         this.props.firebase.offers().on("value", snapshot => {
             const offersObject = snapshot.val();
+            let offers = "";
 
-            const offersList = Object.keys(offersObject).map(key => ({
-                ...offersObject[key],
-                uid: key,
-            }));
+            if(offersObject !==null) {
+                const offersList = Object.keys(offersObject).map(key => ({
+                    ...offersObject[key],
+                    uid: key,
+                }));
 
-            const offers = offersList.map(offer => {
-                switch (offer.category) {
-                    case "mobile":
-                        return (
-                            <Mobile offer={offer} key={offer.uid}/>
-                        );
-                    case "Mangoes":
-                        return (
-                            <p key={offer.uid}>toto</p>
-                        );
-                    case "Papayas":
-                        console.log("Mangoes and papayas are $2.79 a pound.");
-                        // expected output: "Mangoes and papayas are $2.79 a pound."
-                        break;
-                    default :
-                        return (
-                            <p>Unknown type of offer</p>
-                        )
-                }
-            });
-
+                 offers = offersList.map(offer => {
+                    switch (offer.category) {
+                        case "mobile":
+                            return (
+                                <Mobile offer={offer} key={offer.uid}/>
+                            );
+                        case "Mangoes":
+                            return (
+                                <p key={offer.uid}>toto</p>
+                            );
+                        case "Papayas":
+                            console.log("Mangoes and papayas are $2.79 a pound.");
+                            // expected output: "Mangoes and papayas are $2.79 a pound."
+                            break;
+                        default :
+                            return (
+                                <p>Unknown type of offer</p>
+                            )
+                    }
+                    return null;
+                });
+            }
             this.setState({
                 offers : offers,
                 loading: false
@@ -67,7 +70,7 @@ class HomePage extends Component {
         return (
             <Container>
                 {loading ?
-                    <div><p>Chargement des offres...</p></div>
+                    <div><h1>Chargement des offres...</h1></div>
                     : (offers ?
                             <CardColumns>
                                 {offers}

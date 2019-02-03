@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
-import Styles from './Styles';
 import {compose} from 'recompose';
 
 import {
@@ -11,9 +10,10 @@ import {
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import Mobile from './mobile';
+import {Container} from "react-bootstrap";
 
 const ProposePage = () => (
-    <Styles>
+    <Container>
         <AuthUserContext.Consumer>
             {authUser =>
                 authUser ?
@@ -28,7 +28,7 @@ const ProposePage = () => (
                     : <h1><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
             }
         </AuthUserContext.Consumer>
-    </Styles>
+    </Container>
 );
 
 const INITIAL_STATE = {

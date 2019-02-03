@@ -107,7 +107,7 @@ class Firebase {
 //  *** Offer API ***
 
     offer = () => this.db.ref(`offers`);
-    offers = () => this.db.ref().child('offers').orderByChild("created_at").limitToFirst(10);
+    offers = () => this.db.ref().child('offers').orderByChild("status").equalTo("accepted").limitToFirst(10);
 
 }
 

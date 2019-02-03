@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
-import { AuthUserContext } from '../Session';
-import * as ROUTES from '../../constants/routes';
-import {Nav, Navbar, NavItem} from "react-bootstrap";
+import { AuthUserContext } from "../Session";
+import * as ROUTES from "../../constants/routes";
+import {Nav, NavItem} from "react-bootstrap";
 
 const Navigation = () => (
     <AuthUserContext.Consumer>

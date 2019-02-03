@@ -93,7 +93,6 @@ class SignUpFormBase extends Component {
             email,
             passwordOne,
             passwordTwo,
-            admin,
             error,
         } = this.state;
 
@@ -140,15 +139,6 @@ class SignUpFormBase extends Component {
                     type="password"
                     placeholder="Confirmation du mot de passe"
                 />
-                {/*<label>*/}
-                    {/*Admin:*/}
-                    {/*<input*/}
-                        {/*name="admin"*/}
-                        {/*type="checkbox"*/}
-                        {/*checked={admin}*/}
-                        {/*onChange={this.onChangeCheckbox}*/}
-                    {/*/>*/}
-                {/*</label>*/}
                 <button disabled={isInvalid} type="submit">
                     Se créer un compte
                 </button>

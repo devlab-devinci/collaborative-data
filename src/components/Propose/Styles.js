@@ -121,5 +121,11 @@ export default styled.div`
       box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
       padding: 20px;
     }
+    span.error {
+        line-height: 32px;
+        margin-left: 10px;
+        color: #800;
+        font-weight: bold;
+      }
   }
 `;

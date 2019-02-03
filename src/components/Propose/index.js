@@ -10,7 +10,7 @@ import {
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import Mobile from  '../Mobile';
+import Mobile from './mobile';
 
 const ProposePage = () => (
     <Styles>
@@ -38,12 +38,10 @@ const INITIAL_STATE = {
 class ProposeFormBase extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {...INITIAL_STATE};
     }
 
     onSubmit = (values, event) => {
-        console.log("on submit"+JSON.stringify(values,0,2));
         this.props.firebase.offer().push({
             idUser : this.props.authUser.uid,
             created_at : Date.now(),
@@ -70,11 +68,16 @@ class ProposeFormBase extends Component {
         if (!values.title) {
             errors.title = "Obligatoire";
         }
-        if (!values.offerType) {
-            errors.offerType = "Obligatoire";
+        if (!values.price) {
+            errors.price = "Obligatoire";
         }
-        if (!values.offerType) {
-            errors.offerType = "Obligatoire";
+        // const regexPrice = RegExp("(\\d+.*\\d{1,2})");
+        // console.log(regexPrice.test(values.price));
+        // if(!regexPrice.test(values.price)) {
+        //     errors.price = "Veuillez indiquer un prix valable";
+        // }
+        if (!values.category) {
+            errors.category = "Obligatoire";
         }
         return errors;
     };
@@ -86,16 +89,19 @@ class ProposeFormBase extends Component {
                 validate={this.validate}
                 initialValues={{
                     title : "",
+                    price : "",
                     link : "",
                     promo : "",
                     description : "",
-                    offerType : "mobile",
-                    operator : "free",
-                    dataVolume : "20",
-                    commitment : "0",
-                    phone : "false",
-                    calls : "0",
-                    foreign : "true"
+                    category : "mobile",
+                    date_start : "",
+                    date_end : "",
+                    operator : "",
+                    dataVolume : "",
+                    commitment : "",
+                    phone : "",
+                    calls : "",
+                    foreign : ""
                 }}
                 render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
@@ -103,53 +109,103 @@ class ProposeFormBase extends Component {
 
                         <Field name="title">
                             {({ input, meta }) => (
-                                <div className='row-form'>
-                                    <label>Titre *</label>
-                                    <input {...input} type="text" placeholder="Titre" />
-                                    {(meta.error || meta.submitError) &&
-                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
+                                <div className='form-group'>
+                                    <label>Titre *
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="text" placeholder="Titre" className="form-control" />
+
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="price">
+                            {({ input, meta }) => (
+                                <div className='form-group'>
+                                    <label>Prix  *
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="text" placeholder="Prix" className="form-control" />
                                 </div>
                             )}
                         </Field>
 
                         <Field name="link">
                             {({ input, meta }) => (
-                                <div className='row-form'>
-                                    <label>Lien</label>
-                                    <input {...input} type="text" placeholder="Lien vers l'offre" />
-                                    {(meta.error || meta.submitError) &&
-                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
+                                <div className='form-group'>
+                                    <label>Lien
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="text" placeholder="Lien" className="form-control" />
                                 </div>
                             )}
                         </Field>
 
                         <Field name="promo">
                             {({ input, meta }) => (
-                                <div className='row-form'>
-                                    <label>Code promotionnel</label>
-                                    <input {...input} type="text" placeholder="Code promotionnel" />
-                                    {(meta.error || meta.submitError) &&
-                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
+                                <div className='form-group'>
+                                    <label>Code promotionnel
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="text" placeholder="Code promotionnel" className="form-control" />
                                 </div>
                             )}
                         </Field>
 
                         <Field name="description" component="textarea">
                             {({ input, meta }) => (
-                                <div className='row-form'>
-                                    <label>Description</label>
-                                    <textarea {...input} placeholder="Description" />
-                                    {(meta.error || meta.submitError) &&
-                                    meta.touched && <span className='error'>{meta.error || meta.submitError}</span>}
+                                <div className='form-group'>
+                                    <label>Description
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <textarea {...input} placeholder="Description" className="form-control" />
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="date_start">
+                            {({ input, meta }) => (
+                                <div className='form-group'>
+                                    <label>Date de début
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="date" placeholder="Date de début "
+                                           className="form-control" />
+                                </div>
+                            )}
+                        </Field>
+
+                        <Field name="date_end">
+                            {({ input, meta }) => (
+                                <div className='form-group'>
+                                    <label>Date de début
+                                        {(meta.error || meta.submitError) && meta.touched &&
+                                        <span className='error'>{meta.error || meta.submitError}
+                                        </span>}
+                                    </label>
+                                    <input {...input} type="date" placeholder="Date de fin"
+                                           className="form-control" />
                                 </div>
                             )}
                         </Field>
 
                         <h3>2) Sélectionne un type d'offre :</h3>
 
-                        <div className='row-form'>
+                        <div className='form-group'>
                             <label>Type d'offre *</label>
-                            <Field name="offerType" component="select">
+                            <Field name="category" component="select" className="form-control">
                                 <option value="mobile" >Mobile</option>
                                 <option value="internet">Internet</option>
                                 <option value="gas">Gaz</option>
@@ -158,22 +214,14 @@ class ProposeFormBase extends Component {
                             </Field>
                         </div>
 
-                        {console.log(values)}
                         <h3>3) Définis les critères de l'offre :</h3>
-                        {values.offerType === 'mobile' &&
+                        {values.category === 'mobile' &&
                         <Mobile/>
                         }
                         <p>Les champs obligatoires sont signalés par un astérix</p>
 
                         {submitError && <div className="error">{submitError}</div>}
                         <div className="buttons">
-                            <button
-                                type="button"
-                                onClick={reset}
-                                disabled={submitting || pristine}
-                            >
-                                Reset
-                            </button>
                             <button type="submit" disabled={submitting}>
                                 Valider
                             </button>

@@ -10,8 +10,8 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import './index.css';
 
 const SignInPage = () => (
-    <Container>
-        <Row>
+    <Container className="h-100">
+        <Row className="h100">
             <Col>
                 <h2>Vous n'avez pas de compte ?</h2>
                 <h1>Inscrivez-vous</h1>

@@ -12,6 +12,7 @@ import * as ROUTES from '../../constants/routes';
 import Mobile from './mobile';
 import {Container} from "react-bootstrap";
 import Button from "react-bootstrap/es/Button";
+import "./index.css";
 
 const ProposePage = () => (
     <Container>

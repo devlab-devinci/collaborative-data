@@ -2,7 +2,7 @@ import React from "react";
 
 import { AuthUserContext } from "../Session";
 import * as ROUTES from "../../constants/routes";
-import {Nav, Navbar, NavItem} from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
 
 const Navigation = () => (
 
@@ -20,7 +20,7 @@ const Navigation = () => (
 const NavigationAuth = ({ authUser }) => (
 
     <Navbar bg="primary" expand="lg" variant="dark" collapseOnSelect>
-        <Navbar.Brand href={ROUTES.HOME}>Accueil</Navbar.Brand>
+        <Navbar.Brand href={ROUTES.HOME}>Collaborative Data</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end">
@@ -37,12 +37,11 @@ const NavigationAuth = ({ authUser }) => (
 
 const NavigationNonAuth = () => (
     <Navbar bg="primary" expand="lg" variant="dark" collapseOnSelect>
-      <Navbar.Brand href={ROUTES.HOME}>Accueil</Navbar.Brand>
+      <Navbar.Brand href={ROUTES.HOME}>Collaborative Data</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end">
                 <Nav.Link href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
-                <Nav.Link href={ROUTES.SIGN_UP}>S'inscrire</Nav.Link>
                 <Nav.Link href={ROUTES.SIGN_IN}>Se connecter</Nav.Link>
             </Nav>
         </Navbar.Collapse>

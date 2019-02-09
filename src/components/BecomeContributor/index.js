@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {compose} from 'recompose';
 
 import { withFirebase } from '../Firebase';
+import Button from "react-bootstrap/es/Button";
 // import * as ROUTES from '../../constants/routes';
 
 const INITIAL_STATE = {
@@ -63,10 +64,10 @@ class BecomeContributorBase extends Component {
         return (
             <div>
                 {/*{console.log(contributor)}*/}
-                {contributor === null
-                  ? <button onClick={this.onClick} type="submit">
+                {contributor === null || contributor === ""
+                  ? <Button className="mb-3 mt-3" onClick={this.onClick} type="submit">
                     Je souhaite devenir contributeur (et gagner des tokens !)
-                    </button>
+                    </Button>
                   : <p>{msgRequest}</p>
                 }
                 {error && <p>{error.message}</p>}

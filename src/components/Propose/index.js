@@ -11,6 +11,7 @@ import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import Mobile from './mobile';
 import {Container} from "react-bootstrap";
+import Button from "react-bootstrap/es/Button";
 
 const ProposePage = () => (
     <Container>
@@ -23,9 +24,9 @@ const ProposePage = () => (
                             <ProposeForm authUser={authUser}/>
                         </div>
                     ) : (
-                        <h1><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
+                        <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
                     )
-                    : <h1><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
+                    : <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
             }
         </AuthUserContext.Consumer>
     </Container>
@@ -222,9 +223,9 @@ class ProposeFormBase extends Component {
 
                         {submitError && <div className="error">{submitError}</div>}
                         <div className="buttons">
-                            <button type="submit" disabled={submitting}>
+                            <Button type="submit" disabled={submitting} className="mb-5">
                                 Valider
-                            </button>
+                            </Button>
                         </div>
                     </form>
                 )}

@@ -69,8 +69,9 @@ class HomePage extends Component {
 
         return (
             <Container>
+                <h1 className='text-center mb-5'>Je recherche un abonnement</h1>
                 {loading ?
-                    <div><h1>Chargement des offres...</h1></div>
+                    <div><p>Chargement des offres...</p></div>
                     : (offers ?
                             <CardColumns>
                                 {offers}

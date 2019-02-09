@@ -10,6 +10,7 @@ import {
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import BecomeContributor from "../BecomeContributor";
+import {Container} from "react-bootstrap";
 
 //
 // const SIGN_IN_METHODS = [
@@ -32,17 +33,19 @@ import BecomeContributor from "../BecomeContributor";
 // ];
 
 const AccountPage = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div>
-        <h1>Salut {authUser.username} !</h1>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
-        {/*<LoginManagement authUser={authUser} />*/}
-        <BecomeContributor authUser={authUser}/>
-      </div>
-    )}
-  </AuthUserContext.Consumer>
+  <Container>
+    <AuthUserContext.Consumer>
+      {authUser => (
+        <div>
+          <h1 className="text-center">Salut {authUser.username} !</h1>
+          <BecomeContributor authUser={authUser}/>
+          <PasswordForgetForm />
+          <PasswordChangeForm />
+          {/*<LoginManagement authUser={authUser} />*/}
+        </div>
+      )}
+    </AuthUserContext.Consumer>
+  </Container>
 );
 
 // class LoginManagementBase extends Component {

@@ -1,15 +1,34 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {SignInLink} from "../SignIn";
 
 const SignUpPage = () => (
-    <div>
-        <h1>Se créer un compte</h1>
-        <SignUpForm/>
-    </div>
+    <Container>
+        <Row>
+            <Col>
+                <h1>Pourquoi s'inscrire ?</h1>
+                <p>
+                    Inscris toi sur collaborative Data et gagne des récompenses !
+
+                    Abonnements Netflix, Bein Sports...
+                </p>
+                <SignInLink/>
+            </Col>
+            <Col>
+                <div className="divider"></div>
+            </Col>
+            <Col>
+                <h2>Vous n'avez pas encore de compte ?</h2>
+                <h1>Inscrivez-vous</h1>
+                <SignUpForm/>
+            </Col>
+        </Row>
+    </Container>
 );
 
 const INITIAL_STATE = {
@@ -104,54 +123,67 @@ class SignUpFormBase extends Component {
             ;
 
         return (
-            <form onSubmit={this.onSubmit}>
-                <input
-                    name="username"
-                    value={username}
-                    onChange={this.onChangeUsername}
-                    type="text"
-                    placeholder="Pseudo"
-                />
+            <Form onSubmit={this.onSubmit}>
+                <Form.Group controlId="formBasicUsername">
+                    <Form.Label>Pseudo</Form.Label>
+                    <Form.Control type="text"
+                                  placeholder="Pseudo"
+                                  value={username}
+                                  onChange={this.onChangeUsername}
+                                  name="username"
+                    />
+                </Form.Group>
+
                 {/*{console.log(isUsernameTaken)}*/}
                 {/*{console.log(username)}*/}
                 {(isUsernameTaken === true) && username !==''
-                    ?<p>Ce pseudo est déjà utilisé</p>
+                    ?<p className="text-warning">Ce pseudo est déjà utilisé</p>
                     : null
                 }
-                <input
-                    name="email"
-                    value={email}
-                    onChange={this.onChange}
-                    type="text"
-                    placeholder="Email"
-                />
-                <input
-                    name="passwordOne"
-                    value={passwordOne}
-                    onChange={this.onChange}
-                    type="password"
-                    placeholder="Mot de passe"
-                />
-                <input
-                    name="passwordTwo"
-                    value={passwordTwo}
-                    onChange={this.onChange}
-                    type="password"
-                    placeholder="Confirmation du mot de passe"
-                />
-                <button disabled={isInvalid} type="submit">
-                    Se créer un compte
-                </button>
+
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="text"
+                                  placeholder="Email"
+                                  value={email}
+                                  onChange={this.onChange}
+                                  name="email"
+                    />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPasswordOne">
+                    <Form.Label>Mot de passe</Form.Label>
+                    <Form.Control type="password"
+                                  placeholder="Mot de passe"
+                                  value={passwordOne}
+                                  onChange={this.onChange}
+                                  name="password"
+                    />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPasswordTwo">
+                    <Form.Label>Confirmation du mot de passe</Form.Label>
+                    <Form.Control type="password"
+                                  placeholder="Confirmation du mot de passe"
+                                  value={passwordTwo}
+                                  onChange={this.onChange}
+                                  name="password"
+                    />
+                </Form.Group>
+
+                <Button disabled={isInvalid} type="submit" className="mb-5">
+                    <h4>Se créer un compte</h4>
+                </Button>
                 {error && <p>{error.message}</p>}
-            </form>
+            </Form>
         );
     }
 }
 
 const SignUpLink = () => (
-    <p>
-        Pas encore de compte ? <Link to={ROUTES.SIGN_UP}>Se créer un compte</Link>
-    </p>
+    <Button type="submit" className="mb-5" href={ROUTES.SIGN_UP} >
+        <h4>Créer un compte</h4>
+    </Button>
 );
 
 const SignUpForm = compose(

@@ -2,7 +2,7 @@ import React from "react";
 
 import { AuthUserContext } from "../Session";
 import * as ROUTES from "../../constants/routes";
-import {Nav, Navbar} from "react-bootstrap";
+import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 const Navigation = () => (
 
@@ -27,7 +27,10 @@ const NavigationAuth = ({ authUser }) => (
                 <Nav.Link href={ROUTES.PROPOSE}>Proposer une offre</Nav.Link>
                 <Nav.Link href={ROUTES.ACCOUNT}>Mon compte</Nav.Link>
                 {authUser.admin === true && (
-                <Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link>
+                <NavDropdown title="Administrateur" id="nav-dropdown">
+                    <NavDropdown.Item href={ROUTES.USERS}>Utilisateurs</NavDropdown.Item>
+                    <NavDropdown.Item href={ROUTES.OFFERS}>Offres</NavDropdown.Item>
+                </NavDropdown>
                 )}
                 <Nav.Link href={ROUTES.SIGN_OUT}>Déconnexion</Nav.Link>
             </Nav>

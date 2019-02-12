@@ -7,13 +7,11 @@ import { UserList, UserItem } from "../Users";
 import * as ROUTES from "../../constants/routes";
 import Container from "react-bootstrap/es/Container";
 
-const AdminPage = () => (
+const UsersPage = () => (
   <Container>
-    <h1>Admin</h1>
-
     <Switch>
-      <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
-      <Route exact path={ROUTES.ADMIN} component={UserList} />
+      <Route exact path={ROUTES.USERS_DETAILS} component={UserItem} />
+      <Route exact path={ROUTES.USERS} component={UserList} />
     </Switch>
   </Container>
 );
@@ -24,4 +22,4 @@ const condition = authUser =>
 export default compose(
   withEmailVerification,
   withAuthorization(condition),
-)(AdminPage);
+)(UsersPage);

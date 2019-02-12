@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
+import Button from "react-bootstrap/es/Button";
 
 class UserItem extends Component {
   constructor(props) {
@@ -43,28 +44,21 @@ class UserItem extends Component {
 
     return (
       <div>
-        <h2>User ({this.props.match.params.id})</h2>
+        <h2>Utilisateur ({this.props.match.params.id})</h2>
         {loading && <div>Loading ...</div>}
 
         {user && (
           <div>
-            <span>
-              <strong>ID:</strong> {user.uid}
-            </span>
-            <span>
-              <strong>E-Mail:</strong> {user.email}
-            </span>
-            <span>
-              <strong>Username:</strong> {user.username}
-            </span>
-            <span>
-              <button
+              <p><strong>Username : </strong>{user.username}</p>
+              <p><strong>Email: </strong>{user.email}</p>
+              <p><strong>Contributeur: </strong>{user.contributor}</p>
+              <Button
                 type="button"
                 onClick={this.onSendPasswordResetEmail}
+                className="ml-1"
               >
-                Send Password Reset
-              </button>
-            </span>
+                Mise à zéro de l'email
+              </Button>
           </div>
         )}
       </div>

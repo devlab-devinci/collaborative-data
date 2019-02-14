@@ -56,7 +56,7 @@ class SignUpFormBase extends Component {
     onSubmit = event => {
         const {username, email, passwordOne, admin} = this.state;
 
-        let contributor;
+        let contributor = "";
         if(admin) {
             contributor = "accepted";
         }
@@ -157,7 +157,7 @@ class SignUpFormBase extends Component {
                                   placeholder="Mot de passe"
                                   value={passwordOne}
                                   onChange={this.onChange}
-                                  name="password"
+                                  name="passwordOne"
                     />
                 </Form.Group>
 
@@ -167,7 +167,7 @@ class SignUpFormBase extends Component {
                                   placeholder="Confirmation du mot de passe"
                                   value={passwordTwo}
                                   onChange={this.onChange}
-                                  name="password"
+                                  name="passwordTwo"
                     />
                 </Form.Group>
 

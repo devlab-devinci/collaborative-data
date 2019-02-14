@@ -6,7 +6,6 @@ import Button from "react-bootstrap/es/Button";
 class UserItem extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loading: false,
       user: null,

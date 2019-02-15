@@ -16,13 +16,21 @@ code {
   background-color: #0AC7B7 !important;
 }
 
-.btn-primary {
-  background-color: #0AC7B7 !important;
-  border-color: #0AC7B7 !important;
+.btn-custom {
+  background-color: #0AC7B7;
+  border-color: #0AC7B7;
 }
 
-.btn-primary.disabled, .btn-primary:disabled{
-  background-color: #0AC7B7 !important;
+.btn-custom.disabled, .btn-custom:disabled{
+  background-color: #0AC7B7;
+  border-color: #0AC7B7;
+  cursor: not-allowed !important;
+}
+
+.btn-custom:hover{
+  background-color: #0AC7B7;
+  border-color: #0AC7B7;
+  cursor: pointer;
 }
 /* Footer */
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');

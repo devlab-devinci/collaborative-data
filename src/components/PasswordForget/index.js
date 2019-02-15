@@ -60,7 +60,7 @@ class PasswordForgetFormBase extends Component {
                                   name="email"
                     />
                 </Form.Group>
-                <Button disabled={isInvalid} type="submit" className="mb-5">
+                <Button disabled={isInvalid} type="submit" className="mb-5 btn-custom">
                     Réinitialiser mon email
                 </Button>
 

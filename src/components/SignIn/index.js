@@ -106,7 +106,7 @@ class SignInFormBase extends Component {
                                   name="password"
                     />
                 </Form.Group>
-                <Button disabled={isInvalid} type="submit" className="mb-5">
+                <Button disabled={isInvalid} type="submit" className="mb-5 btn-custom">
                     <h4>Se connecter</h4>
                 </Button>
 
@@ -255,7 +255,7 @@ class SignInTwitterBase extends Component {
 }
 
 const SignInLink = () => (
-    <Button type="submit" className="mb-5" href={ROUTES.SIGN_IN} >
+    <Button type="submit" className="mb-5 btn-custom" href={ROUTES.SIGN_IN} >
         <h4>Se connecter</h4>
     </Button>
 );

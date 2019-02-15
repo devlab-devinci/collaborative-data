@@ -62,7 +62,7 @@ class PasswordChangeForm extends Component {
                             name="password"
               />
           </Form.Group>
-          <Button disabled={isInvalid} type="submit" className="mb-5">
+          <Button disabled={isInvalid} type="submit" className="mb-5 btn-custom">
               Réinitialiser mon mot de passe
           </Button>
         {error && <p>{error.message}</p>}

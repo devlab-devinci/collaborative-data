@@ -171,7 +171,7 @@ class SignUpFormBase extends Component {
                     />
                 </Form.Group>
 
-                <Button disabled={isInvalid} type="submit" className="mb-5">
+                <Button disabled={isInvalid} type="submit" className="mb-5 btn-custom">
                     <h4>Se créer un compte</h4>
                 </Button>
                 {error && <p>{error.message}</p>}
@@ -181,7 +181,7 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-    <Button type="submit" className="mb-5" href={ROUTES.SIGN_UP} >
+    <Button type="submit" className="mb-5 btn-custom" href={ROUTES.SIGN_UP} >
         <h4>Créer un compte</h4>
     </Button>
 );

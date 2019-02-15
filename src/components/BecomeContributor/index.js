@@ -65,7 +65,7 @@ class BecomeContributorBase extends Component {
             <div>
                 {/*{console.log(contributor)}*/}
                 {contributor === null || contributor === ""
-                  ? <Button className="mb-3 mt-3" onClick={this.onClick} type="submit">
+                  ? <Button className="mb-3 mt-3 btn-custom" onClick={this.onClick} type="submit">
                     Je souhaite devenir contributeur (et gagner des tokens !)
                     </Button>
                   : <p>{msgRequest}</p>

@@ -223,7 +223,7 @@ class ProposeFormBase extends Component {
 
                         {submitError && <div className="error">{submitError}</div>}
                         <div className="buttons">
-                            <Button type="submit" disabled={submitting} className="mb-5">
+                            <Button type="submit" disabled={submitting} className="mb-5 btn-custom">
                                 Valider
                             </Button>
                         </div>

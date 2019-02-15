@@ -48,6 +48,7 @@ const withEmailVerification = Component => {
                   type="button"
                   onClick={this.onSendEmailVerification}
                   disabled={this.state.isSent}
+                  className="btn-custom"
                 >
                   Envoyer un e-mail de confirmation
                 </Button>

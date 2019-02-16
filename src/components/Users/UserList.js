@@ -17,7 +17,7 @@ class UserList extends Component {
     componentDidMount() {
         this.setState({loading: true});
 
-        this.props.firebase.users().on("value", snapshot => {
+        this.props.firebase.users().limitToFirst(10).on("value", snapshot => {
             const usersObject = snapshot.val();
 
             const usersList = Object.keys(usersObject).map(key => ({

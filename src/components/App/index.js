@@ -17,6 +17,7 @@ import PasswordForgetPage from "../PasswordForget";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 import UsersPage from "../Admin/users";
+import OffersPage from "../Admin/offers";
 import ProposePage from "../Propose";
 import Terms from "../Terms";
 import Privacy from "../Privacy";

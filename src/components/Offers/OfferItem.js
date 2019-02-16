@@ -3,69 +3,69 @@ import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import Button from "react-bootstrap/es/Button";
 
-class UserItem extends Component {
+class OfferItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      user: null,
+      offer: null,
       ...props.location.state,
     };
   }
 
   componentDidMount() {
-    if (this.state.user) {
+    if (this.state.offer) {
       return;
     }
 
     this.setState({ loading: true });
 
     this.props.firebase
-      .user(this.props.match.params.id)
+      .offer(this.props.match.params.id)
       .on('value', snapshot => {
         this.setState({
-          user: snapshot.val(),
+          offer: snapshot.val(),
           loading: false,
         });
       });
   }
 
   componentWillUnmount() {
-    this.props.firebase.user(this.props.match.params.id).off();
+    this.props.firebase.offer(this.props.match.params.id).off();
   }
 
   onSendPasswordResetEmail = () => {
-    this.props.firebase.doPasswordReset(this.state.user.email);
+    this.props.firebase.doPasswordReset(this.state.offer.email);
   };
 
   acceptContributor = () => {
-      this.props.firebase.user(this.state.user.uid).update({
+      this.props.firebase.offer(this.state.offer.uid).update({
           contributor : "accepted",
       }).then(() => {
-          this.setState({user : {...this.state.user, contributor: "accepted"}});
+          this.setState({offer : {...this.state.offer, contributor: "accepted"}});
       })
   };
 
   refuseContributor = () => {
-      this.props.firebase.user(this.state.user.uid).update({
+      this.props.firebase.offer(this.state.offer.uid).update({
           contributor : "refused",
       }).then(() => {
-          this.setState({user : {...this.state.user, contributor: "refused"}});
+          this.setState({offer : {...this.state.offer, contributor: "refused"}});
       })
   };
 
   render() {
-    const { user, loading } = this.state;
+    const { offer, loading } = this.state;
 
     return (
       <div>
         <h2>Utilisateur ({this.props.match.params.id})</h2>
         {loading && <div>Loading ...</div>}
 
-        {user && (
+        {offer && (
           <div>
-              <p><strong>Username : </strong>{user.username}</p>
-              <p><strong>Email: </strong>{user.email}
+              <p><strong>offername : </strong>{offer.offername}</p>
+              <p><strong>Email: </strong>{offer.email}
                   <Button
                       type="button"
                       onClick={this.onSendPasswordResetEmail}
@@ -75,13 +75,13 @@ class UserItem extends Component {
                   </Button>
               </p>
               <p><strong>Contributeur: </strong>
-                  {user.contributor === "" ?
+                  {offer.contributor === "" ?
                     "Aucune demande"
                     :
-                    user.contributor
+                    offer.contributor
                   }
               </p>
-              {user.contributor !== "accepted" ?
+              {offer.contributor !== "accepted" ?
                   <Button
                       type="button"
                       onClick={this.acceptContributor}
@@ -95,7 +95,7 @@ class UserItem extends Component {
                       onClick={this.refuseContributor}
                       className="ml-1 btn-danger"
                   >
-                    Refuser le statut de contributeur
+                    Refoffer le statut de contributeur
                   </Button>
               }
           </div>
@@ -105,4 +105,4 @@ class UserItem extends Component {
   }
 }
 
-export default withFirebase(UserItem);
+export default withFirebase(OfferItem);

@@ -57,7 +57,7 @@ class SignUpFormBase extends Component {
     onSubmit = event => {
         const {username, email, passwordOne, admin} = this.state;
 
-        let contributor;
+        let contributor = "";
         if(admin) {
             contributor = "accepted";
         }
@@ -169,18 +169,19 @@ class SignUpFormBase extends Component {
                     <Form.Check type="checkbox" name="terms" className="signup__form__checkbox" label="J'accepte les conditions générales d'utilisation et la politique de confidentialité" />
                 </Form.Group>
 
-                <Button disabled={isInvalid} type="submit" className="signup__form__btn">Je m'inscris</Button>
-
                 <div className="signup__form__error">
                     {error && <p>{error.message}</p>}
                 </div>
+
+                <Button disabled={isInvalid} type="submit" className="signup__form__btn">Je m'inscris</Button>
+
             </Form>
         );
     }
 }
 
 const SignUpLink = () => (
-    <Button type="submit" className="mb-5" href={ROUTES.SIGN_UP} >
+    <Button type="submit" className="mb-5 btn-custom" href={ROUTES.SIGN_UP} >
         <h4>Créer un compte</h4>
     </Button>
 );

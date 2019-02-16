@@ -2,6 +2,8 @@ import React from 'react';
 
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
+import Container from "react-bootstrap/es/Container";
+import Button from "react-bootstrap/es/Button";
 
 const needsEmailVerification = authUser =>
   authUser &&
@@ -29,27 +31,28 @@ const withEmailVerification = Component => {
         <AuthUserContext.Consumer>
           {authUser =>
             needsEmailVerification(authUser) ? (
-              <div>
+              <Container>
                 {this.state.isSent ? (
-                  <p>
+                  <h2>
                     Email de confirmation envoyé, merci de confirmer votre mail puis rafraîchir cette page
                     une fois que votre adresse mail est confirmée
-                  </p>
+                  </h2>
                 ) : (
-                  <p>
+                  <h2>
                     Un e-mail de confirmation vous a été envoyé.
                     Cliquez sur le bouton en dessous si vous n'avez pas reçu de mail.
-                  </p>
+                  </h2>
                 )}
 
-                <button
+                <Button
                   type="button"
                   onClick={this.onSendEmailVerification}
                   disabled={this.state.isSent}
+                  className="btn-custom"
                 >
                   Envoyer un e-mail de confirmation
-                </button>
-              </div>
+                </Button>
+              </Container>
             ) : (
               <Component {...this.props} />
             )

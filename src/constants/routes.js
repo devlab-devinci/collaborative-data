@@ -19,3 +19,4 @@ export const PASSWORD_FORGET = "/pw-forget";
 export const USERS = "/admin/users";
 export const USERS_DETAILS = "/admin/users/:id";
 export const OFFERS = "/admin/offers";
+export const OFFERS_DETAILS = "/admin/offers/:id";

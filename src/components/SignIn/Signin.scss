@@ -1,0 +1,89 @@
+.signin {
+    min-height: calc(100vh - 138px);
+    display: flex;
+    background: #0AC7B7;
+    align-items: center;
+    justify-content: center;
+    &__content {
+        display: flex;
+        padding: 40px 30px;
+        background: #f8f8f8;
+        border-radius: 20px;
+        border-bottom: 5px solid #ebebeb;
+        &__title {
+            color: #4c3476;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+    }
+    &__left {
+        flex: 1;
+        border-right: 2px solid #0AC7B7;
+        padding: 0 20px;
+        padding-right: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__right {
+        flex: 1;
+        padding: 0 30px;
+        padding-left: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__register {
+        &__text {
+            color: #4c3476;
+            margin-bottom: 30px;
+        }
+        &__btn {
+            color: #FFF;
+            background: #4c3476;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+    }
+    &__form {
+        &__label {
+            display: block;
+            padding-left: 15px;
+            font-weight: 900;
+        }
+        &__input {
+            height: 50px;
+            border: none;
+            border-bottom: 2px solid #ebebeb;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 1.1em;
+        }
+        &__link {
+            color: #000;
+            font-size: 0.75em;
+            font-weight: 400;
+            float: right;
+            margin-top: 4px;
+            margin-right: 12px;
+            text-decoration: underline;
+        }
+        &__btn {
+            border: none;
+            color: #FFF;
+            background-color: #4c3476!important;
+            padding: 10px 20px!important;
+            margin-top: 25px;
+            border-radius: 20px;
+            line-height: normal;
+            &:disabled {
+                background-color: #634991!important;
+            }
+        }
+        &__error {
+            color: #FF0000;
+            font-size: 0.8em;
+            padding: 0 15px;
+        }
+    }
+}

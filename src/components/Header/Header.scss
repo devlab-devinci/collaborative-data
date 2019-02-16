@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    background: #0AC7B7;
+    align-items: center;
+    min-height: 80px;
+    &__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &__link {
+            color: #FFF;
+            text-transform: uppercase;
+            padding: 10px;
+            font-size: 1.1em;
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+    &__right-nav {
+        display: flex;
+    }
+    &__socials {
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+        &__link {
+            color: #FFF;
+            padding: 10px 8px;
+            font-size: 1.1em;
+        }
+    }
+}

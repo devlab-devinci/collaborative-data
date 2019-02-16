@@ -1,9 +1,10 @@
 import React, {Component} from "react";
+import "./Home.scss";
 import {compose} from "recompose";
 
 import {withFirebase} from "../Firebase";
 import {withAlert} from "react-alert";
-import {Container, CardColumns} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Mobile from "./mobile";
 
 class HomePage extends Component {
@@ -68,18 +69,25 @@ class HomePage extends Component {
         const {offers, loading} = this.state;
 
         return (
-            <Container>
-                <h1 className='text-center mb-5'>Je recherche un abonnement</h1>
-                {loading ?
-                    <div><p>Chargement des offres...</p></div>
-                    : (offers ?
-                            <CardColumns>
-                                {offers}
-                            </CardColumns>
+            <div className="home">
+              <div className="home__landing">
+                <Container>
+                    <h1 className="home__landing__title">Je recherche un abonnement</h1>
+                    <nav className="home__landing__nav">
+                        <a href="javascript:void()" className="home__landing__nav__link">Mobile</a>
+                        <a href="javascript:void()" className="home__landing__nav__link">Internet</a>
+                        <a href="javascript:void()" className="home__landing__nav__link">Gaz</a>
+                        <a href="javascript:void()" className="home__landing__nav__link">Éléctricité</a>
+                    </nav>
+                </Container>
+              </div>
+              <div className="home__offers">
+                <Container>
+                  { loading ? <div className="home__offers__loading"><p>Chargement des offres...</p></div> : (offers ? <div className="home__offers__offer">{offers}</div> : <h1>Aucune offre disponible</h1>) }
+                </Container>
+              </div>
 
-                            : <h1>Aucune offre disponible</h1>
-                    )}
-            </Container>
+            </div>
         );
     }
 }

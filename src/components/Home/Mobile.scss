@@ -1,0 +1,46 @@
+.offer {
+    display: flex;
+    width: 100%;
+    background: #f8f8f8;
+    border-radius: 30px;
+    border-bottom: 5px solid #ebebeb;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 20px;
+    &__thumbnail {
+        &__img {
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+        }
+    }
+    &__content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 20px;
+        &__title {
+            color: #0eafa5;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+        &__excerpt {
+            font-weight: 300;
+            margin-top: 10px;
+            padding-right: 50px;
+        }
+    }
+    &__more {
+        position: absolute;
+        right: 22px;
+        bottom: 20px;
+        &__link {
+            color: #FFF;
+            background: #0eafa5;
+            border-radius: 50%;
+            padding: 6px 10px;
+            font-size: 1.5em;
+        }
+    }
+}

@@ -1,34 +1,35 @@
 import React, {Component} from 'react';
+import "./Signup.scss";
+
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {SignInLink} from "../SignIn";
 
 const SignUpPage = () => (
-    <Container>
-        <Row>
-            <Col>
-                <h1>Pourquoi s'inscrire ?</h1>
-                <p>
-                    Inscris toi sur collaborative Data et gagne des récompenses !
-
-                    Abonnements Netflix, Bein Sports...
-                </p>
-                <SignInLink/>
-            </Col>
-            <Col>
-                <div className="divider"></div>
-            </Col>
-            <Col>
-                <h2>Vous n'avez pas encore de compte ?</h2>
-                <h1>Inscrivez-vous</h1>
-                <SignUpForm/>
-            </Col>
-        </Row>
-    </Container>
+    <div className="signup">
+      <Container>
+        <div className="signup__content">
+          <div className="signup__left signup__login">
+            <div className="signup__content__title first"><strong>Pourquoi s'inscrire ?</strong></div>
+            <div className="signup__login__text">
+                <p>En vous inscrivant, vous rejoignez la communauté de collaborative data. Ainsi en participant à la vie du site, vous gagner des tokens à utiliser pour vous offrir un abonnement sur les platformes en partenariat avec HiMike.</p>
+                <strong>Comment ça marche ?</strong>
+            </div>
+            <div className="signup__login__cta">
+                <div className="signup__content__title center">Vous avez déjà un compte ? <br/><strong>Connectez-vous</strong></div>
+                <a href={ROUTES.SIGN_IN} className="signin__register__btn">Je me connecte</a>
+            </div>
+          </div>
+          <div className="signup__right signup_form">
+            <div className="signup__content__title">Vous n'avez pas de compte ?<br/><strong>Inscrivez-vous avec le formulaire ci-dessous</strong></div>
+            <SignUpForm/>
+          </div>
+        </div>
+      </Container>
+    </div>
 );
 
 const INITIAL_STATE = {
@@ -44,7 +45,7 @@ const INITIAL_STATE = {
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
-  Un compte utilisant cette adresse mail existe déjà 
+  Un compte utilisant cette adresse mail existe déjà
 `;
 
 class SignUpFormBase extends Component {
@@ -125,56 +126,54 @@ class SignUpFormBase extends Component {
         return (
             <Form onSubmit={this.onSubmit}>
                 <Form.Group controlId="formBasicUsername">
-                    <Form.Label>Pseudo</Form.Label>
-                    <Form.Control type="text"
-                                  placeholder="Pseudo"
-                                  value={username}
-                                  onChange={this.onChangeUsername}
-                                  name="username"
-                    />
+                    <Form.Label className="signup__form__label">Identifiant</Form.Label>
+                    <Form.Control type="text" value={username} onChange={this.onChangeUsername} name="username" className="signup__form__input" />
                 </Form.Group>
 
-                {/*{console.log(isUsernameTaken)}*/}
-                {/*{console.log(username)}*/}
+                <div className="signup__form__error">
                 {(isUsernameTaken === true) && username !==''
                     ?<p className="text-warning">Ce pseudo est déjà utilisé</p>
                     : null
                 }
+                </div>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label className="signup__form__label">Adresse email</Form.Label>
+                            <Form.Control type="text" value={email} onChange={this.onChange} name="email" className="signup__form__input" />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="formBasicEmailTwo">
+                            <Form.Label className="signup__form__label">Confirmer votre adresse email</Form.Label>
+                            <Form.Control type="text" value={email} onChange={this.onChange} name="email" className="signup__form__input" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId="formBasicPasswordOne">
+                            <Form.Label className="signup__form__label">Mot de passe</Form.Label>
+                            <Form.Control type="password" value={passwordOne} onChange={this.onChange} name="password" className="signup__form__input" />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="formBasicPasswordTwo">
+                            <Form.Label className="signup__form__label">Confirmation du mot de passe</Form.Label>
+                            <Form.Control type="password" value={passwordTwo} onChange={this.onChange} name="password" className="signup__form__input" />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="text"
-                                  placeholder="Email"
-                                  value={email}
-                                  onChange={this.onChange}
-                                  name="email"
-                    />
+                <Form.Group>
+                    <Form.Check type="checkbox" name="terms" className="signup__form__checkbox" label="J'accepte les conditions générales d'utilisation et la politique de confidentialité" />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPasswordOne">
-                    <Form.Label>Mot de passe</Form.Label>
-                    <Form.Control type="password"
-                                  placeholder="Mot de passe"
-                                  value={passwordOne}
-                                  onChange={this.onChange}
-                                  name="password"
-                    />
-                </Form.Group>
+                <Button disabled={isInvalid} type="submit" className="signup__form__btn">Je m'inscris</Button>
 
-                <Form.Group controlId="formBasicPasswordTwo">
-                    <Form.Label>Confirmation du mot de passe</Form.Label>
-                    <Form.Control type="password"
-                                  placeholder="Confirmation du mot de passe"
-                                  value={passwordTwo}
-                                  onChange={this.onChange}
-                                  name="password"
-                    />
-                </Form.Group>
-
-                <Button disabled={isInvalid} type="submit" className="mb-5">
-                    <h4>Se créer un compte</h4>
-                </Button>
-                {error && <p>{error.message}</p>}
+                <div className="signup__form__error">
+                    {error && <p>{error.message}</p>}
+                </div>
             </Form>
         );
     }

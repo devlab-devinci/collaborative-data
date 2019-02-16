@@ -19,7 +19,7 @@ class HomePage extends Component {
     componentDidMount() {
         this.setState({loading: true});
 
-        this.props.firebase.offers().on("value", snapshot => {
+        this.props.firebase.offersAccepted().on("value", snapshot => {
             const offersObject = snapshot.val();
             let offers = "";
 

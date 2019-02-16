@@ -8,3 +8,4 @@ export const PROPOSE = "/propose";
 export const USERS = "/admin/users";
 export const USERS_DETAILS = "/admin/users/:id";
 export const OFFERS = "/admin/offers";
+export const OFFERS_DETAILS = "/admin/offers/:id";

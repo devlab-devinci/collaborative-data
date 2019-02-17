@@ -5,13 +5,14 @@ import { compose } from "recompose";
 import { withAuthorization, withEmailVerification } from "../Session";
 import * as ROUTES from "../../constants/routes";
 import Container from "react-bootstrap/es/Container";
-import {OfferItem, OfferList} from "../Offers";
+import {OfferModify ,OfferItem, OfferList} from "../Offers";
 
 const OffersPage = () => (
   <Container>
     <Switch>
-      <Route exact path={ROUTES.OFFERS_DETAILS} component={OfferItem} />
-      <Route exact path={ROUTES.OFFERS} component={OfferList} />
+        <Route exact path={ROUTES.OFFERS_MODIFY} component={OfferModify} />
+        <Route exact path={ROUTES.OFFERS_DETAILS} component={OfferItem} />
+        <Route exact path={ROUTES.OFFERS} component={OfferList} />
     </Switch>
   </Container>
 );

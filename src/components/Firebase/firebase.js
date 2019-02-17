@@ -106,6 +106,7 @@ class Firebase {
 
 //  *** Offer API ***
 
+    offerId = uid => this.db.ref(`offers/${uid}`);
     offer = () => this.db.ref(`offers`);
     offers = () => this.db.ref().child('offers').limitToFirst(10);
     offersAccepted = () => this.db.ref().child('offers').orderByChild("status").equalTo("accepted").limitToFirst(10);

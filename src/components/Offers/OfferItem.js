@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
 import Button from "react-bootstrap/es/Button";
+import * as ROUTES from "../../constants/routes";
+import {Link} from "react-router-dom";
 
 class OfferItem extends Component {
   constructor(props) {
@@ -34,68 +36,81 @@ class OfferItem extends Component {
     this.props.firebase.offer(this.props.match.params.id).off();
   }
 
-  onSendPasswordResetEmail = () => {
-    this.props.firebase.doPasswordReset(this.state.offer.email);
-  };
-
-  acceptContributor = () => {
-      this.props.firebase.offer(this.state.offer.uid).update({
-          contributor : "accepted",
+  acceptStatus = () => {
+      this.props.firebase.offerId(this.state.offer.uid).update({
+          status : "accepted"
       }).then(() => {
-          this.setState({offer : {...this.state.offer, contributor: "accepted"}});
+          this.setState({offer : {...this.state.offer, status: "accepted"}});
       })
   };
 
-  refuseContributor = () => {
-      this.props.firebase.offer(this.state.offer.uid).update({
-          contributor : "refused",
+  refuseStatus = () => {
+      this.props.firebase.offerId(this.state.offer.uid).update({
+          status : "refused"
       }).then(() => {
-          this.setState({offer : {...this.state.offer, contributor: "refused"}});
+          this.setState({offer : {...this.state.offer, status: "refused"}});
       })
   };
 
   render() {
     const { offer, loading } = this.state;
-
     return (
       <div>
-        <h2>Utilisateur ({this.props.match.params.id})</h2>
+        <h2>Offre ({this.props.match.params.id})</h2>
         {loading && <div>Loading ...</div>}
 
         {offer && (
           <div>
-              <p><strong>offername : </strong>{offer.offername}</p>
-              <p><strong>Email: </strong>{offer.email}
-                  <Button
-                      type="button"
-                      onClick={this.onSendPasswordResetEmail}
-                      className="ml-1 btn-custom"
+              <p><strong>Titre : </strong>{offer.title}</p>
+              <p><strong>Catégorie: </strong>{offer.category}</p>
+              <p><strong>Lien: </strong>{offer.link}</p>
+              <p><strong>Statut: </strong>{offer.status}</p>
+              <Button type="button" className="btn-warning">
+                  <Link
+                  to={{
+                  pathname: `${ROUTES.OFFERS}/${offer.uid}/modify`,
+                  state: {offer},
+              }}
                   >
-                      Mise à zéro de l'email
-                  </Button>
-              </p>
-              <p><strong>Contributeur: </strong>
-                  {offer.contributor === "" ?
-                    "Aucune demande"
-                    :
-                    offer.contributor
-                  }
-              </p>
-              {offer.contributor !== "accepted" ?
+                      Modifier l'offre
+              </Link>
+
+              </Button>
+
+              {offer.status === "pending" &&
+              <div className="d-inline-flex">
                   <Button
                       type="button"
-                      onClick={this.acceptContributor}
-                      className="ml-1 btn-success"
-                  >
-                    Accepter le statut de contributeur
-                  </Button>
-                  :
-                  <Button
-                      type="button"
-                      onClick={this.refuseContributor}
+                      onClick={this.refuseStatus}
                       className="ml-1 btn-danger"
                   >
-                    Refoffer le statut de contributeur
+                      Refuser l'offre
+                  </Button>
+                  <Button
+                      type="button"
+                      onClick={this.acceptStatus}
+                      className="ml-1 btn-success"
+                  >
+                      Accepter l'offre
+                  </Button>
+              </div>
+              }
+              {offer.status === "accepted" && offer.status !== "pending " &&
+                  <Button
+                      type="button"
+                      onClick={this.refuseStatus}
+                      className="ml-1 btn-danger"
+                  >
+                      Refuser l'offre
+                  </Button>
+              }
+              {offer.status === "refused" && offer.status !== "pending " &&
+              <Button
+                      type="button"
+                      onClick={this.acceptStatus}
+                      className="ml-1 btn-success"
+                  >
+                      Accepter l'offre
                   </Button>
               }
           </div>

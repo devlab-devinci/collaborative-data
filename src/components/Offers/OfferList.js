@@ -34,7 +34,6 @@ class OfferList extends Component {
 
     render() {
         const {offers, loading} = this.state;
-
         return (
             <div>
                 <h1>Liste des offres :</h1>

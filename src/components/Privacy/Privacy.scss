@@ -1,0 +1,12 @@
+.privacy {
+    min-height: calc(100vh - 138px);
+    &__content {
+        &__title {
+            font-weight: 900;
+            font-size: 2.5em;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+    }
+}

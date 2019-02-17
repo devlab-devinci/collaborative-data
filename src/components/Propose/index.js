@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import "./Propose.scss";
 import {Link, withRouter} from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import {compose} from 'recompose';
@@ -14,22 +15,24 @@ import {Container} from "react-bootstrap";
 import Button from "react-bootstrap/es/Button";
 
 const ProposePage = () => (
-    <Container>
-        <AuthUserContext.Consumer>
-            {authUser =>
-                authUser ?
-                    authUser.contributor === 'accepted' ? (
-                        <div>
-                            <h1>Proposer une offre</h1>
-                            <ProposeForm authUser={authUser}/>
-                        </div>
-                    ) : (
-                        <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
-                    )
-                    : <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
-            }
-        </AuthUserContext.Consumer>
-    </Container>
+    <div className="propose">
+        <Container>
+            <AuthUserContext.Consumer>
+                {authUser =>
+                    authUser ?
+                        authUser.contributor === 'accepted' ? (
+                            <div>
+                                <h1>Proposer une offre</h1>
+                                <ProposeForm authUser={authUser}/>
+                            </div>
+                        ) : (
+                            <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
+                        )
+                        : <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
+                }
+            </AuthUserContext.Consumer>
+        </Container>
+    </div>
 );
 
 const INITIAL_STATE = {

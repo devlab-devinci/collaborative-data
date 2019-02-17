@@ -44,6 +44,7 @@ const App = () => (
         <Route path={ROUTES.HOME} component={HomePage} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.USERS} component={UsersPage} />
+        <Route path={ROUTES.OFFERS} component={OffersPage} />
         <Route path={ROUTES.PROPOSE} component={ProposePage} />
         <Route path={ROUTES.TERMS} component={Terms} />
         <Route path={ROUTES.PRIVACY} component={Privacy} />

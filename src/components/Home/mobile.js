@@ -9,12 +9,54 @@ class Mobile extends Component {
                     <img src={require("../../images/card.svg")} alt="" className="offer__thumbnail__img" />
                 </div>
                 <div className="offer__content">
-                    <div className="offer__content__title">{this.props.offer.title}</div>
-                    <div className="offer__content__excerpt"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu odio elit. Proin eu malesuada nisi, quis aliquet tellus. Sed tristique blandit odio eu mattis. Nulla gravida ornare sapien, nec sollicitudin lacus. Aliquam erat volutpat. Sed lacinia aliquet diam, non convallis enim. Aenean quam urna, viverra et laoreet eget, condimentum vitae enim. Etiam feugiat vehicula urna. Suspendisse vitae facilisis orci. Etiam ornare vulputate nibh. Nullam vel risus imperdiet, volutpat erat eget, semper justo. </div>
+                <div className="offer__content__title">{this.props.offer.title}</div>
+                {this.props.offer.description &&
+                    <div className="offer__content__excerpt">{this.props.offer.description}</div>
+                }
+                {this.props.offer.price &&
+                    <div className="offer__content__excerpt">Prix : {this.props.offer.price} €</div>
+                }
+                {this.props.offer.promo &&
+                    <div className="offer__content__excerpt">Code promotionnel :{this.props.offer.promo}</div>
+                }
+                {this.props.offer.date_start &&
+                    <div className="offer__content__excerpt">Début : {this.props.offer.date_start}</div>
+                }
+                {this.props.offer.date_end &&
+                    <div className="offer__content__excerpt">Fin : {this.props.offer.date_end}</div>
+                }
+                {this.props.offer.operator &&
+                    <div className="offer__content__excerpt">Opérateur : {this.props.offer.operator}</div>
+                }
+                {this.props.offer.data &&
+                    <div className="offer__content__excerpt">Data : {this.props.offer.data} Go</div>
+                }
+                {this.props.offer.commitment && this.props.offer.commitment === "0" ?
+                    <div className="offer__content__excerpt">Sans engagement</div>
+                    :
+                    <div className="offer__content__excerpt">Engagement : {this.props.offer.commitment} mois</div>
+                }
+                {this.props.offer.phone && this.props.offer.phone=== "true" ?
+                    <div className="offer__content__excerpt">Avec téléphone</div>
+                    :
+                    <div className="offer__content__excerpt">Sans téléphone</div>
+                }
+                {this.props.offer.calls&& this.props.offer.calls === "0" ?
+                    <div className="offer__content__excerpt">Appels illimités</div>
+                    :
+                    <div className="offer__content__excerpt">Appels : {this.props.offer.calls} mois</div>
+                }
+                {this.props.offer.foreign && this.props.offer.foreign === "true" ?
+                    <div className="offer__content__excerpt">Appels à l'étranger</div>
+                    :
+                    <div className="offer__content__excerpt">Sans appels à l'étranger</div>
+                }
                 </div>
-                <div className="offer__more">
-                    <a href={this.props.offer.link} className="offer__more__link" target="_blank" rel="noopener noreferrer"><i className="fas fa-plus"></i></a>
-                </div>
+                {this.props.offer.link &&
+                    <div className="offer__more">
+                        <a href={this.props.offer.link} className="offer__more__link" target="_blank" rel="noopener noreferrer"><i className="fas fa-plus"></i></a>
+                    </div>
+                }
             </div>
 
             // <Card>

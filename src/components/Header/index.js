@@ -2,7 +2,7 @@ import React from "react";
 import "./Header.scss";
 
 import * as ROUTES from "../../constants/routes";
-import { Container } from "react-bootstrap";
+import {Container, NavDropdown} from "react-bootstrap";
 import { AuthUserContext } from "../Session";
 
 const Header = () => (
@@ -28,12 +28,14 @@ const NavigationAuth = ({ authUser }) => (
           </div>
           <div className="header__right-nav">
             <a href={ROUTES.PROPOSE} className="header__nav__link">Proposer une offre</a>
-            <a href={ROUTES.ACCOUNT} className="header__nav__link dropdown"><i className="far fa-user"></i> Alexis Buon</a>
-            <nav className="header__socials">
-              <a href="https://www.facebook.com/monhimike/" className="header__socials__link facebook" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
-              <a href="https://twitter.com/HiMike_App" className="header__socials__link twitter" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
-              <a href="https://www.linkedin.com/company/hi-mike/" className="header__socials__link linkedin" target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
-            </nav>
+            <a href={ROUTES.ACCOUNT} className="header__nav__link"><i className="far fa-user"></i>Mon compte</a>
+              {authUser.admin === true && (
+                  <NavDropdown title="Administrateur" id="nav-dropdown" className="header__nav__link dropdown">
+                      <NavDropdown.Item href={ROUTES.USERS}>Utilisateurs</NavDropdown.Item>
+                      <NavDropdown.Item href={ROUTES.OFFERS}>Offres</NavDropdown.Item>
+                  </NavDropdown>
+              )}
+              <a href={ROUTES.SIGN_OUT} className="header__nav__link">Déconnexion</a>
           </div>
         </div>
       </Container>

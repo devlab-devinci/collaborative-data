@@ -97,12 +97,12 @@ class ProposeFormBase extends Component {
                     category : "mobile",
                     date_start : "",
                     date_end : "",
-                    operator : "",
+                    operator : "Free",
                     dataVolume : "",
-                    commitment : "",
-                    phone : "",
-                    calls : "",
-                    foreign : ""
+                    commitment : "0",
+                    phone : "true",
+                    calls : "0",
+                    foreign : "true"
                 }}
                 render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
@@ -191,7 +191,7 @@ class ProposeFormBase extends Component {
                         <Field name="date_end">
                             {({ input, meta }) => (
                                 <div className='form-group'>
-                                    <label>Date de début
+                                    <label>Date de fin
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}

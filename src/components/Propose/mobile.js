@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Field } from 'react-final-form';
-import Styles from './Styles';
 
 class Mobile extends Component {
     constructor(props) {
@@ -12,9 +11,9 @@ class Mobile extends Component {
     }
     render() {
         return (
-            <Styles>
+            <div>
                 <div className='form-group'>
-                    <label>Opérateur *</label>
+                    <label>Opérateur</label>
                     <Field name="operator" component="select" className="form-control">
                         <option value="free">Free</option>
                         <option value="orange">Orange</option>
@@ -37,7 +36,7 @@ class Mobile extends Component {
                 </Field>
 
                 <div className='form-group'>
-                    <label>Engagement *</label>
+                    <label>Engagement</label>
                     <Field name="commitment" component="select" className="form-control">
                         <option value="0">Sans engagement</option>
                         <option value="6">6 mois</option>
@@ -47,7 +46,7 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Téléphone *</label>
+                    <label>Téléphone</label>
                     <Field name="phone" component="select" className="form-control">
                         <option value="false">Sans téléphone</option>
                         <option value="true">Avec téléphone</option>
@@ -55,7 +54,7 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Appels *</label>
+                    <label>Appels</label>
                     <Field name="calls" component="select" className="form-control">
                         <option value="0">Illimité</option>
                         <option value="2">2h</option>
@@ -63,14 +62,14 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Appels à l'étranger *</label>
+                    <label>Appels à l'étranger</label>
                     <Field name="foreign" component="select" className="form-control">
                         <option value="true">Oui</option>
                         <option value="false">Non</option>
                     </Field>
                 </div>
 
-            </Styles>
+            </div>
         )
     }
 }

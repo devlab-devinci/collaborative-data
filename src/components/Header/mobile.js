@@ -24,7 +24,7 @@ const HeaderMobile = () => (
 
 const NavigationAuth = ({ authUser }) => (
     <div className="header__mobile">
-        <div className="header__mobile__close" onClick={closeMobileNav}><i class="fas fa-times"></i></div>
+        <div className="header__mobile__close" onClick={closeMobileNav}><i className="fas fa-times"></i></div>
         <Container>
             <div className="header__mobile__content">
                 <nav className="header__mobile__nav">
@@ -32,7 +32,7 @@ const NavigationAuth = ({ authUser }) => (
                     <a href="javascript:void()" className="header__mobile__nav__link">À propos</a>
                     <a href={ROUTES.PROPOSE} className="header__mobile__nav__link">Proposer une offre</a>
                     <a href={ROUTES.ACCOUNT} className="header__mobile__nav__link">Mon profil</a>
-                    <a href={ROUTES.ACCOUNT} className="header__mobile__nav__link">Mes offres</a>
+                    <a href={ROUTES.ACCOUNT} className="header__mobile__nav__link">Mes contributions</a>
                     <a href={ROUTES.SIGN_OUT} className="header__mobile__nav__link">Déconnexion</a>
                     {authUser.admin === true && (
                         <div className="header__mobile__nav__admin">

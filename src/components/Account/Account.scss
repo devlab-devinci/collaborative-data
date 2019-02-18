@@ -1,3 +1,66 @@
 .account {
-    
+    padding-top: 50px;
+    .container {
+        display: flex;
+        align-items: flex-start;
+    }
+    &__sidebar {
+        flex: 1;
+        padding: 20px 30px;
+        background: #f8f8f8;
+        border-radius: 20px;
+        border-bottom: 5px solid #ebebeb;
+        &__username {
+            text-align: right;
+            font-size: 1.5em;
+        }
+        &__role {
+            color: #4c3476;
+            text-align: right;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.1em;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #EDEDED;
+        }
+        &__nav {
+            display: flex;
+            flex-direction: column;
+            &__link {
+                color: #0AC7B7;
+                margin: 10px 0;
+                text-align: right;
+                text-transform: uppercase;
+                &.logout {
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+    &__content {
+        flex: 3;
+        padding: 25px 50px;
+        &__title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #EDEDED;
+        }
+        &__section {
+            border-bottom: 1px solid #EDEDED;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            &:last-of-type {
+                border-bottom: none;
+            }
+            &__title {
+                text-transform: uppercase;
+                font-weight: 300;
+                margin-bottom: 20px;
+                font-size: 1.65em;
+            }
+        }
+    }
 }

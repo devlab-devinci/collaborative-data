@@ -36,20 +36,42 @@ import { compose } from "recompose";
 // ];
 
 const AccountPage = () => (
-  <Container>
     <AuthUserContext.Consumer>
       {authUser => (
-        <div>
-          <h1 className="text-center">Salut {authUser.username} !</h1>
-          <BecomeContributor authUser={authUser}/>
-          <PasswordForgetForm />
-          <PasswordChangeForm />
-          <AccountOffers authUser={authUser}/>
-          {/*<LoginManagement authUser={authUser} />*/}
+        <div className="account">
+          <Container>
+            <div className="account__sidebar">
+                <div className="account__sidebar__avatar"></div>
+                <div className="account__sidebar__username">{authUser.username},</div>
+                <div className="account__sidebar__role">{authUser.contributor ? authUser.admin ? "Administrateur" : "Contributeur" : "Utilisateur"}</div>
+                <nav className="account__sidebar__nav">
+                    <a href="#" className="account__sidebar__nav__link">Mes informations</a>
+                    <a href="#" className="account__sidebar__nav__link">Mes contributions</a>
+                    <a href="#" className="account__sidebar__nav__link">Modifier mon mot de passe</a>
+                    <a href={ROUTES.SIGN_OUT} className="account__sidebar__nav__link logout">Déconnexion</a>
+                </nav>
+            </div>
+            <div className="account__content">
+                <h1 className="account__content__title">Mon compte</h1>
+                <div className="account__content__section">
+                    <h2 className="account__content__section__title">Mes informations</h2>
+                    <PasswordForgetForm />
+                </div>
+                <div className="account__content__section">
+                    <h2 className="account__content__section__title">Mes contributions</h2>
+                    <AccountOffers authUser={authUser}/>
+                </div>
+                <div className="account__content__section">
+                    <h2 className="account__content__section__title">Modifier mon mot de passe</h2>
+                    <PasswordChangeForm />
+                </div>
+
+                {/*<LoginManagement authUser={authUser} />*/}
+            </div>
+          </Container>
         </div>
       )}
     </AuthUserContext.Consumer>
-  </Container>
 );
 
 class AccountOffersBase extends Component {
@@ -88,7 +110,6 @@ class AccountOffersBase extends Component {
         const { offers, loading } = this.state;
         return (
             <div>
-                <h2>Mes offres:</h2>
                 {loading ?
                     <div>Loading ...</div>
                     : offers ? (

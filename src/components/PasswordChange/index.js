@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./PasswordChange.scss";
 
 import { withFirebase } from '../Firebase';
 import {Button, Form} from "react-bootstrap";
@@ -44,25 +45,16 @@ class PasswordChangeForm extends Component {
     return (
       <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicPasswordOne">
-              <Form.Label>Mot de passe</Form.Label>
-              <Form.Control type="password"
-                            placeholder="Mot de passe"
-                            value={passwordOne}
-                            onChange={this.onChange}
-                            name="password"
-              />
+              <Form.Label className="pw-change__form__label">Mot de passe</Form.Label>
+              <Form.Control type="password" value={passwordOne} onChange={this.onChange} name="password" className="pw-change__form__input" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPasswordTwo">
-              <Form.Label>Confirmation du mot de passe</Form.Label>
-              <Form.Control type="password"
-                            placeholder="Confirmation du mot de passe"
-                            value={passwordTwo}
-                            onChange={this.onChange}
-                            name="password"
-              />
+              <Form.Label className="pw-change__form__label">Confirmation du mot de passe</Form.Label>
+              <Form.Control type="password" value={passwordTwo} onChange={this.onChange} name="password" className="pw-change__form__input" />
           </Form.Group>
-          <Button disabled={isInvalid} type="submit" className="mb-5 btn-custom">
+
+          <Button disabled={isInvalid} type="submit" className="pw-change__form__btn">
               Réinitialiser mon mot de passe
           </Button>
         {error && <p>{error.message}</p>}

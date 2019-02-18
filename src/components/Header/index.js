@@ -34,10 +34,10 @@ const NavigationAuth = ({ authUser }) => (
           <div className="header__right-nav">
             <a href={ROUTES.PROPOSE} className="header__nav__link">Proposer une offre</a>
             <div className="header__nav__link dropdown">
-                <i className="far fa-user"></i>Mon compte
+                <i className="far fa-user"></i> Mon compte
                 <div className="header__nav__dropdown">
                     <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mon profil</a>
-                    <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mes offres</a>
+                    <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mes contributions</a>
                     <a href={ROUTES.SIGN_OUT} className="header__nav__dropdown__link">Déconnexion</a>
                     {authUser.admin === true && (
                         <div className="header__nav__dropdown__admin">

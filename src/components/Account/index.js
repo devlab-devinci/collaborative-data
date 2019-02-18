@@ -1,4 +1,4 @@
-import React  from "react";
+import React, {Component} from "react";
 import "./Account.scss";
 
 import {
@@ -6,11 +6,13 @@ import {
   withAuthorization,
   withEmailVerification,
 } from "../Session";
-// import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import BecomeContributor from "../BecomeContributor";
 import {Container} from "react-bootstrap";
+import {Link, withRouter} from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
+import {withFirebase} from "../Firebase";
 import { compose } from "recompose";
 
 //
@@ -42,12 +44,83 @@ const AccountPage = () => (
           <BecomeContributor authUser={authUser}/>
           <PasswordForgetForm />
           <PasswordChangeForm />
+          <AccountOffers authUser={authUser}/>
           {/*<LoginManagement authUser={authUser} />*/}
         </div>
       )}
     </AuthUserContext.Consumer>
   </Container>
 );
+
+class AccountOffersBase extends Component {
+
+    constructor(props) {
+        console.log(props)
+        super(props);
+
+        this.state = {
+            loading: false,
+            offers: [],
+        };
+    }
+
+    componentDidMount() {
+        this.setState({loading: true});
+
+        this.props.firebase.myOffers(this.props.authUser.uid).on("value", snapshot => {
+            let offersObject = snapshot.val();
+            console.log(offersObject)
+
+            if(offersObject !== null) {
+                offersObject =  Object.keys(offersObject).map(key => ({
+                    ...offersObject[key],
+                    uid: key,
+                }));
+            }
+
+            this.setState({
+                offers: offersObject,
+                loading: false,
+            });
+        });
+    }
+    render() {
+        const { offers, loading } = this.state;
+        return (
+            <div>
+                <h2>Mes offres:</h2>
+                {loading ?
+                    <div>Loading ...</div>
+                    : offers ? (
+                        <table className="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Lien</th>
+                            <th scope="col">Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {offers.map(offer => (
+                            <tr
+                                key={offer.uid}>
+                                <td>{offer.title}</td>
+                                <td>{offer.category}</td>
+                                <td><a href={offer.link}>{offer.link}</a></td>
+                                <td><strong>{offer.status}</strong></td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    ) : (
+                        <p>Aucune offre postée</p>
+                    )
+                }
+            </div>
+        );
+    }
+}
 
 // class LoginManagementBase extends Component {
 //   constructor(props) {
@@ -231,6 +304,10 @@ const AccountPage = () => (
 // const LoginManagement = withFirebase(LoginManagementBase);
 
 const condition = authUser => !!authUser;
+
+const AccountOffers = compose(
+    withFirebase,
+)(AccountOffersBase);
 
 export default compose(
   withEmailVerification,

@@ -1,63 +1,73 @@
-import React, {Component} from 'react';
-import "./Propose.scss";
-import {Link, withRouter} from 'react-router-dom';
-import { Form, Field } from 'react-final-form';
-import {compose} from 'recompose';
+import React, {Component} from "react";
 
-import {
-    AuthUserContext,
-} from '../Session';
-
-import {withFirebase} from '../Firebase';
-import * as ROUTES from '../../constants/routes';
-import Mobile from './mobile';
-import {Container} from "react-bootstrap";
+import {withFirebase} from "../Firebase";
 import Button from "react-bootstrap/es/Button";
+import * as ROUTES from "../../constants/routes";
+import {Link, withRouter} from "react-router-dom";
+import {Field, Form} from "react-final-form";
+import Mobile from "../Propose/mobile";
+import {Container} from "react-bootstrap";
+import AuthUserContext from "../Session/context";
+import {compose} from "recompose";
 
-const ProposePage = () => (
-    <div className="propose">
-        <Container>
-            <AuthUserContext.Consumer>
-                {authUser =>
-                    authUser ?
-                        authUser.contributor === 'accepted' ? (
-                            <div>
-                                <h1>Proposer une offre</h1>
-                                <ProposeForm authUser={authUser}/>
-                            </div>
-                        ) : (
-                            <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
-                        )
-                        : <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
-                }
-            </AuthUserContext.Consumer>
-        </Container>
-    </div>
+const OfferModifyPage = () => (
+    <Container>
+        <AuthUserContext.Consumer>
+            {authUser =>
+                authUser ?
+                    authUser.contributor === 'accepted' ? (
+                        <div>
+                            <h1>Modifier l'offre</h1>
+                            <OfferModifyForm authUser={authUser}/>
+                        </div>
+                    ) : (
+                        <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre
+                            !</Link></h1>
+                    )
+                    :
+                    <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link>
+                    </h1>
+            }
+        </AuthUserContext.Consumer>
+    </Container>
 );
 
-const INITIAL_STATE = {
-    error: ''
-};
-
-class ProposeFormBase extends Component {
+class OfferModifyBase extends Component {
     constructor(props) {
         super(props);
-        this.state = {...INITIAL_STATE};
+        console.log(props)
+        this.state = {
+            loading: false,
+            offer: null,
+            ...props.location.state,
+        };
+    }
+
+    componentDidMount() {
+        if (this.state.offer) {
+            return;
+        }
+
+        this.setState({loading: true});
+
+        this.props.firebase
+            .offer(this.props.match.params.id)
+            .on("value", snapshot => {
+                this.setState({
+                    offer: snapshot.val(),
+                    loading: false,
+                });
+            });
     }
 
     onSubmit = (values, event) => {
-        this.props.firebase.offer().push({
-            idUser : this.props.authUser.uid,
-            created_at : Date.now(),
-            status : "pending",
+        this.props.firebase.offerId(this.props.match.params.id).update({
             ...values
         })
             .then(() => {
-                this.setState({...INITIAL_STATE});
                 this.props.history.push(
                     {
-                        pathname : ROUTES.HOME,
-                        state : { alert : 'Votre annonce a été enregistrée, elle est en cours de validation par les administrateurs'}
+                        pathname: ROUTES.OFFERS
                     });
             })
             .catch(error => {
@@ -75,11 +85,6 @@ class ProposeFormBase extends Component {
         if (!values.price) {
             errors.price = "Obligatoire";
         }
-        // const regexPrice = RegExp("(\\d+.*\\d{1,2})");
-        // console.log(regexPrice.test(values.price));
-        // if(!regexPrice.test(values.price)) {
-        //     errors.price = "Veuillez indiquer un prix valable";
-        // }
         if (!values.category) {
             errors.category = "Obligatoire";
         }
@@ -87,98 +92,88 @@ class ProposeFormBase extends Component {
     };
 
     render() {
+        const {offer, loading} = this.state;
+
         return (
             <Form
                 onSubmit={this.onSubmit}
                 validate={this.validate}
                 initialValues={{
-                    title : "",
-                    price : "",
-                    link : "",
-                    promo : "",
-                    description : "",
-                    category : "mobile",
-                    date_start : "",
-                    date_end : "",
-                    operator : "",
-                    dataVolume : "",
-                    commitment : "0",
-                    phone : "true",
-                    calls : "0",
-                    foreign : "true"
+                    ...offer
                 }}
-                render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
+                render={({submitError, handleSubmit, reset, submitting, pristine, values}) => (
                     <form onSubmit={handleSubmit}>
                         <h3> 1) Dis-nous en plus sur l'offre :</h3>
 
                         <Field name="title">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Titre *
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}
                                     </label>
-                                    <input {...input} type="text" placeholder="Titre" className="form-control" />
+                                    <input {...input} type="text" placeholder="Titre" className="form-control"/>
 
                                 </div>
                             )}
                         </Field>
 
                         <Field name="price">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
-                                    <label>Prix  *
+                                    <label>Prix *
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}
                                     </label>
-                                    <input {...input} type="text" placeholder="Prix" className="form-control" />
+                                    <input {...input} type="text" placeholder="Prix" className="form-control"/>
                                 </div>
                             )}
                         </Field>
 
                         <Field name="link">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Lien
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}
                                     </label>
-                                    <input {...input} type="text" placeholder="Lien" className="form-control" />
+                                    <input {...input} type="text" placeholder="Lien" className="form-control"/>
                                 </div>
                             )}
                         </Field>
 
                         <Field name="promo">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Code promotionnel
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}
                                     </label>
-                                    <input {...input} type="text" placeholder="Code promotionnel" className="form-control" />
+                                    <input {...input} type="text" placeholder="Code promotionnel"
+                                           className="form-control"/>
                                 </div>
                             )}
                         </Field>
 
                         <Field name="description" component="textarea">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Description
                                         {(meta.error || meta.submitError) && meta.touched &&
                                         <span className='error'>{meta.error || meta.submitError}
                                         </span>}
                                     </label>
-                                    <textarea {...input} placeholder="Description" className="form-control" />
+                                    <textarea {...input} placeholder="Description" className="form-control"/>
                                 </div>
                             )}
                         </Field>
 
                         <Field name="date_start">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Date de début
                                         {(meta.error || meta.submitError) && meta.touched &&
@@ -186,13 +181,13 @@ class ProposeFormBase extends Component {
                                         </span>}
                                     </label>
                                     <input {...input} type="date" placeholder="Date de début "
-                                           className="form-control" />
+                                           className="form-control"/>
                                 </div>
                             )}
                         </Field>
 
                         <Field name="date_end">
-                            {({ input, meta }) => (
+                            {({input, meta}) => (
                                 <div className='form-group'>
                                     <label>Date de fin
                                         {(meta.error || meta.submitError) && meta.touched &&
@@ -200,7 +195,7 @@ class ProposeFormBase extends Component {
                                         </span>}
                                     </label>
                                     <input {...input} type="date" placeholder="Date de fin"
-                                           className="form-control" />
+                                           className="form-control"/>
                                 </div>
                             )}
                         </Field>
@@ -210,7 +205,7 @@ class ProposeFormBase extends Component {
                         <div className='form-group'>
                             <label>Type d'offre *</label>
                             <Field name="category" component="select" className="form-control">
-                                <option value="mobile" >Mobile</option>
+                                <option value="mobile">Mobile</option>
                                 <option value="internet">Internet</option>
                                 <option value="gas">Gaz</option>
                                 <option value="electricity">Électricité</option>
@@ -219,7 +214,7 @@ class ProposeFormBase extends Component {
                         </div>
 
                         <h3>3) Définis les critères de l'offre :</h3>
-                        {values.category === 'mobile' &&
+                        {values.category === "mobile" &&
                         <Mobile/>
                         }
                         <p>Les champs obligatoires sont signalés par un astérix</p>
@@ -233,15 +228,15 @@ class ProposeFormBase extends Component {
                     </form>
                 )}
             />
-        )
+        );
     }
 }
 
-const ProposeForm = compose(
-    withRouter,
+const OfferModifyForm = compose(
     withFirebase,
-)(ProposeFormBase);
+    withRouter,
+)(OfferModifyBase);
 
-export default ProposePage;
+export {OfferModifyForm}
 
-export {ProposeForm};
+export default OfferModifyPage;

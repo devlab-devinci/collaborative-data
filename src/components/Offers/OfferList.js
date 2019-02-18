@@ -18,15 +18,17 @@ class OfferList extends Component {
         this.setState({loading: true});
 
         this.props.firebase.offers().on("value", snapshot => {
-            const offersObject = snapshot.val();
+            let offersObject = snapshot.val();
 
-            const offersList = Object.keys(offersObject).map(key => ({
-                ...offersObject[key],
-                uid: key,
-            }));
+            if(offersObject !== null) {
+                offersObject =  Object.keys(offersObject).map(key => ({
+                    ...offersObject[key],
+                    uid: key,
+                }));
+            }
 
             this.setState({
-                offers: offersList,
+                offers: offersObject,
                 loading: false,
             });
         });
@@ -34,7 +36,6 @@ class OfferList extends Component {
 
     render() {
         const {offers, loading} = this.state;
-
         return (
             <div>
                 <h1>Liste des offres :</h1>

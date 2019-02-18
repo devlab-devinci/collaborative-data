@@ -98,6 +98,9 @@
             &:disabled {
                 background-color: #634991!important;
             }
+            &:hover {
+                color: #FFF;
+            }
         }
         &__error {
             color: #FF0000;

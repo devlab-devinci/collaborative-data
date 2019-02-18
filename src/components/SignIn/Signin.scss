@@ -57,6 +57,9 @@
             background: #4c3476;
             padding: 10px 20px;
             border-radius: 20px;
+            &:hover {
+                color: #FFF;
+            }
         }
     }
     &__form {
@@ -92,6 +95,9 @@
             line-height: normal;
             &:disabled {
                 background-color: #634991!important;
+            }
+            &:hover {
+                color: #FFF;
             }
         }
         &__error {

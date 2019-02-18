@@ -19,7 +19,6 @@ const MSG_ACCEPTED_CONTRIBUTOR = "Vous êtes déjà contributeur ! Félicitation
 class BecomeContributorBase extends Component {
     constructor(props) {
         super(props);
-        // console.log(this.props)
 
         this.state = { ...INITIAL_STATE };
     }
@@ -28,7 +27,7 @@ class BecomeContributorBase extends Component {
         if(this.props.authUser.contributor !== undefined) {
             this.setState({ contributor : this.props.authUser.contributor });
             switch(this.props.authUser.contributor) {
-                case 'rejected' :
+                case 'refused' :
                     this.setState({ msgRequest : MSG_REFUSED_CONTRIBUTOR });
                     break;
                 case 'accepted' :

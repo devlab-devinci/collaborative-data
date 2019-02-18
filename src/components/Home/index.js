@@ -83,7 +83,9 @@ class HomePage extends Component {
               </div>
               <div className="home__offers">
                 <Container>
-                  { loading ? <div className="home__offers__loading"><p>Chargement des offres...</p></div> : (offers ? <div className="home__offers__offer">{offers}</div> : <h1>Aucune offre disponible</h1>) }
+                    <div className="home__offers__offer">
+                        { loading ? <div className="home__offers__loading"><p>Chargement des offres...</p></div> : (offers ? <div>{offers}</div> : <h1>Aucune offre disponible</h1>) }
+                    </div>
                 </Container>
               </div>
 

@@ -2,8 +2,13 @@ import React from "react";
 import "./Header.scss";
 
 import * as ROUTES from "../../constants/routes";
-import {Container, NavDropdown} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import { AuthUserContext } from "../Session";
+
+function handleMobileNav() {
+    let mobile_nav = document.getElementsByClassName("header__mobile");
+        mobile_nav[0].classList.add("active");
+}
 
 const Header = () => (
 
@@ -28,15 +33,32 @@ const NavigationAuth = ({ authUser }) => (
           </div>
           <div className="header__right-nav">
             <a href={ROUTES.PROPOSE} className="header__nav__link">Proposer une offre</a>
-            <a href={ROUTES.ACCOUNT} className="header__nav__link"><i className="far fa-user"></i>Mon compte</a>
-              {authUser.admin === true && (
-                  <NavDropdown title="Administrateur" id="nav-dropdown" className="header__nav__link dropdown">
-                      <NavDropdown.Item href={ROUTES.USERS}>Utilisateurs</NavDropdown.Item>
-                      <NavDropdown.Item href={ROUTES.OFFERS}>Offres</NavDropdown.Item>
-                  </NavDropdown>
-              )}
-              <a href={ROUTES.SIGN_OUT} className="header__nav__link">Déconnexion</a>
+            <div className="header__nav__link dropdown">
+                <i className="far fa-user"></i>Mon compte
+                <div className="header__nav__dropdown">
+                    <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mon profil</a>
+                    <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mes offres</a>
+                    <a href={ROUTES.SIGN_OUT} className="header__nav__dropdown__link">Déconnexion</a>
+                    {authUser.admin === true && (
+                        <div className="header__nav__dropdown__admin">
+                          <h6 className="header__nav__dropdown__admin__label">Administration</h6>
+                          <a href={ROUTES.USERS} className="header__nav__dropdown__link">Utilisateurs</a>
+                          <a href={ROUTES.OFFERS} className="header__nav__dropdown__link">Offres</a>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <nav className="header__socials">
+              <a href="https://www.facebook.com/monhimike/" className="header__socials__link facebook" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/HiMike_App" className="header__socials__link twitter" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
+              <a href="https://www.linkedin.com/company/hi-mike/" className="header__socials__link linkedin" target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
+            </nav>
           </div>
+        </div>
+        <div className="header__nav-mobile">
+            <button className="header__nav-mobile__btn" onClick={handleMobileNav}>
+                <i className="fas fa-ellipsis-h"></i>
+            </button>
         </div>
       </Container>
     </header>

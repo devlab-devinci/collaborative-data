@@ -40,7 +40,6 @@ class Footer extends Component {
           <div className="footer__bottom">
               <div className="footer__bottom__subrow">
                   <span className="footer__bottom__copyright">2019 &copy; Tous droits réservés.</span>
-                  <p className="footer__bottom__content">Collaborative Data</p>
                   <nav className="footer__bottom__nav">
                       <a href={ROUTES.PRIVACY} className="footer__bottom__nav__link">Politique de confidentialité</a>
                       <a href={ROUTES.TERMS} className="footer__bottom__nav__link">Mentions légales</a>

@@ -1,5 +1,5 @@
 import React  from "react";
-import { compose } from "recompose";
+import "./Account.scss";
 
 import {
   AuthUserContext,
@@ -11,6 +11,7 @@ import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import BecomeContributor from "../BecomeContributor";
 import {Container} from "react-bootstrap";
+import { compose } from "recompose";
 
 //
 // const SIGN_IN_METHODS = [

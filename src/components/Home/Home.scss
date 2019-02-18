@@ -25,5 +25,8 @@
     }
     &__offers {
         margin-top: -20vh;
+        &.no-margin {
+            margin: 0;
+        }
     }
 }

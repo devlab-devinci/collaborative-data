@@ -4,7 +4,8 @@ import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
 // LAYOUT
-import Header from "../Header";
+import Header from "../Header/index.js";
+import HeaderMobile from "../Header/mobile.js";
 import Footer from "../Footer";
 
 // LOG
@@ -29,8 +30,9 @@ import { withAuthentication } from "../Session";
 const history = createBrowserHistory();
 
 const App = () => (
-  <Router history={history}>
+  <Router>
     <div>
+      <HeaderMobile />
       <Header />
 
       <main>

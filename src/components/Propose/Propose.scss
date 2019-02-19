@@ -1,3 +1,85 @@
 .propose {
     min-height: calc(100vh - 138px);
+    &__content {
+        &__title {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #EDEDED;
+        }
+    }
+    &__form {
+        display: flex;
+        align-items: flex-start;
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+        }
+        &__content {
+            flex: 2;
+            padding: 20px 0;
+            padding-right: 50px;
+            @media screen and (max-width: 1024px) {
+                padding-right: 0;
+            }
+        }
+        &__sidebar {
+            flex: 1;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 20px;
+            border-bottom: 5px solid #ebebeb;
+        }
+        &__section {
+            margin-bottom: 20px;
+            &__title {
+                font-size: 1.5em;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+        }
+        &__label {
+            display: block;
+            font-weight: 700;
+            padding: 0 15px;
+        }
+        &__input {
+            width: 100%;
+            padding: 10px 15px;
+            box-shadow: none;
+            border: 2px solid #0AC7B7;
+            border-radius: 25px;
+        }
+        &__error {
+            color: #FF0000;
+            font-size: 0.8em;
+            padding: 10px 15px;
+        }
+        &__textarea {
+            width: 100%;
+            padding: 10px 15px;
+            box-shadow: none;
+            border: 2px solid #0AC7B7;
+            border-radius: 25px;
+            min-height: 200px;
+        }
+        &__required__label {
+            font-size: 0.9em;
+        }
+        &__btn {
+            border: none;
+            color: #FFF;
+            background-color: #4c3476!important;
+            padding: 10px 20px!important;
+            margin-top: 25px;
+            border-radius: 20px;
+            line-height: normal;
+            &:disabled {
+                background-color: #634991!important;
+            }
+            &:hover {
+                color: #FFF;
+            }
+        }
+    }
 }

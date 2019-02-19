@@ -29,7 +29,7 @@ const NavigationAuth = ({ authUser }) => (
         <div className="header__nav">
           <div className="header__left-nav">
             <a href={ROUTES.HOME} className="header__nav__link">Accueil</a>
-            <a href="javascript:void()" className="header__nav__link">À propos</a>
+            <a href={ROUTES.ABOUT} className="header__nav__link">À propos</a>
           </div>
           <div className="header__right-nav">
             <a href={ROUTES.PROPOSE} className="header__nav__link">Proposer une offre</a>
@@ -37,8 +37,6 @@ const NavigationAuth = ({ authUser }) => (
                 <i className="far fa-user"></i> Mon compte
                 <div className="header__nav__dropdown">
                     <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mon profil</a>
-                    <a href={ROUTES.ACCOUNT} className="header__nav__dropdown__link">Mes contributions</a>
-                    <a href={ROUTES.SIGN_OUT} className="header__nav__dropdown__link">Déconnexion</a>
                     {authUser.admin === true && (
                         <div className="header__nav__dropdown__admin">
                           <h6 className="header__nav__dropdown__admin__label">Administration</h6>
@@ -46,6 +44,7 @@ const NavigationAuth = ({ authUser }) => (
                           <a href={ROUTES.OFFERS} className="header__nav__dropdown__link">Offres</a>
                         </div>
                     )}
+                    <a href={ROUTES.SIGN_OUT} className="header__nav__dropdown__link logout">Déconnexion</a>
                 </div>
             </div>
             <nav className="header__socials">

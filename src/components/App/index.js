@@ -16,12 +16,13 @@ import PasswordForgetPage from "../PasswordForget";
 
 // PAGES
 import HomePage from "../Home";
+import AboutPage from "../About";
 import AccountPage from "../Account";
 import UsersPage from "../Admin/users";
 import OffersPage from "../Admin/offers";
 import ProposePage from "../Propose";
-import Terms from "../Terms";
-import Privacy from "../Privacy";
+import TermsPage from "../Terms";
+import PrivacyPage from "../Privacy";
 
 
 import * as ROUTES from "../../constants/routes";
@@ -44,12 +45,13 @@ const App = () => (
         <Route path={ROUTES.SIGN_OUT} component={SignOutPage} />
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
         <Route path={ROUTES.HOME} component={HomePage} />
+        <Route path={ROUTES.ABOUT} component={AboutPage} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.USERS} component={UsersPage} />
         <Route path={ROUTES.OFFERS} component={OffersPage} />
         <Route path={ROUTES.PROPOSE} component={ProposePage} />
-        <Route path={ROUTES.TERMS} component={Terms} />
-        <Route path={ROUTES.PRIVACY} component={Privacy} />
+        <Route path={ROUTES.TERMS} component={TermsPage} />
+        <Route path={ROUTES.PRIVACY} component={PrivacyPage} />
       </main>
 
       <Footer history={history} />

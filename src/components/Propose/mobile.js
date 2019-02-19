@@ -13,7 +13,7 @@ class Mobile extends Component {
         return (
             <div>
                 <div className='form-group'>
-                    <label>Opérateur</label>
+                    <label className="propose__form__label">Opérateur</label>
                     <Field name="operator" component="select" className="form-control">
                         <option value="free">Free</option>
                         <option value="orange">Orange</option>
@@ -25,7 +25,7 @@ class Mobile extends Component {
                 <Field name="dataVolume">
                     {({ input, meta }) => (
                         <div className='form-group'>
-                            <label>Data
+                            <label className="propose__form__label">Data
                                 {(meta.error || meta.submitError) && meta.touched &&
                                 <span className='error'>{meta.error || meta.submitError}
                                         </span>}
@@ -36,7 +36,7 @@ class Mobile extends Component {
                 </Field>
 
                 <div className='form-group'>
-                    <label>Engagement</label>
+                    <label className="propose__form__label">Engagement</label>
                     <Field name="commitment" component="select" className="form-control">
                         <option value="0">Sans engagement</option>
                         <option value="6">6 mois</option>
@@ -46,7 +46,7 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Téléphone</label>
+                    <label className="propose__form__label">Téléphone</label>
                     <Field name="phone" component="select" className="form-control">
                         <option value="false">Sans téléphone</option>
                         <option value="true">Avec téléphone</option>
@@ -54,7 +54,7 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Appels</label>
+                    <label className="propose__form__label">Appels</label>
                     <Field name="calls" component="select" className="form-control">
                         <option value="0">Illimité</option>
                         <option value="2">2h</option>
@@ -62,7 +62,7 @@ class Mobile extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label>Appels à l'étranger</label>
+                    <label className="propose__form__label">Appels à l'étranger</label>
                     <Field name="foreign" component="select" className="form-control">
                         <option value="true">Oui</option>
                         <option value="false">Non</option>

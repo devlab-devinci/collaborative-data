@@ -29,11 +29,9 @@ const NavigationAuth = ({ authUser }) => (
             <div className="header__mobile__content">
                 <nav className="header__mobile__nav">
                     <a href={ROUTES.HOME} className="header__mobile__nav__link">Accueil</a>
-                    <a href="javascript:void()" className="header__mobile__nav__link">À propos</a>
+                    <a href={ROUTES.ABOUT} className="header__mobile__nav__link">À propos</a>
                     <a href={ROUTES.PROPOSE} className="header__mobile__nav__link">Proposer une offre</a>
                     <a href={ROUTES.ACCOUNT} className="header__mobile__nav__link">Mon profil</a>
-                    <a href={ROUTES.ACCOUNT} className="header__mobile__nav__link">Mes contributions</a>
-                    <a href={ROUTES.SIGN_OUT} className="header__mobile__nav__link">Déconnexion</a>
                     {authUser.admin === true && (
                         <div className="header__mobile__nav__admin">
                           <h6 className="header__mobile__nav__admin__label">Administration</h6>
@@ -41,6 +39,7 @@ const NavigationAuth = ({ authUser }) => (
                           <a href={ROUTES.OFFERS} className="header__mobile__nav__link">Offres</a>
                         </div>
                     )}
+                    <a href={ROUTES.SIGN_OUT} className="header__mobile__nav__link logout">Déconnexion</a>
                 </nav>
                 <nav className="header__mobile__socials">
                   <a href="https://www.facebook.com/monhimike/" className="header__mobile__socials__link facebook" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>

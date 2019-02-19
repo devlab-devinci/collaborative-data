@@ -9,48 +9,51 @@ class Mobile extends Component {
                     <img src={require("../../images/card.svg")} alt="" className="offer__thumbnail__img" />
                 </div>
                 <div className="offer__content">
-                <div className="offer__content__title">{this.props.offer.title}</div>
-                {this.props.offer.description &&
-                    <div className="offer__content__excerpt">{this.props.offer.description}</div>
-                }
-                {this.props.offer.price &&
-                    <div className="offer__content__excerpt">Prix : {this.props.offer.price} €</div>
-                }
-                {this.props.offer.promo &&
-                    <div className="offer__content__excerpt">Code promotionnel :{this.props.offer.promo}</div>
-                }
-                {this.props.offer.date_start &&
-                    <div className="offer__content__excerpt">Début : {this.props.offer.date_start}</div>
-                }
-                {this.props.offer.date_end &&
-                    <div className="offer__content__excerpt">Fin : {this.props.offer.date_end}</div>
-                }
-                {this.props.offer.operator &&
-                    <div className="offer__content__excerpt">Opérateur : {this.props.offer.operator}</div>
-                }
-                {this.props.offer.data &&
-                    <div className="offer__content__excerpt">Data : {this.props.offer.data} Go</div>
-                }
-                {this.props.offer.commitment && this.props.offer.commitment === "0" ?
-                    <div className="offer__content__excerpt">Sans engagement</div>
-                    :
-                    <div className="offer__content__excerpt">Engagement : {this.props.offer.commitment} mois</div>
-                }
-                {this.props.offer.phone && this.props.offer.phone=== "true" ?
-                    <div className="offer__content__excerpt">Avec téléphone</div>
-                    :
-                    <div className="offer__content__excerpt">Sans téléphone</div>
-                }
-                {this.props.offer.calls&& this.props.offer.calls === "0" ?
-                    <div className="offer__content__excerpt">Appels illimités</div>
-                    :
-                    <div className="offer__content__excerpt">Appels : {this.props.offer.calls} mois</div>
-                }
-                {this.props.offer.foreign && this.props.offer.foreign === "true" ?
-                    <div className="offer__content__excerpt">Appels à l'étranger</div>
-                    :
-                    <div className="offer__content__excerpt">Sans appels à l'étranger</div>
-                }
+                    <div className="offer__content__type">{this.props.offer.category}</div>
+                    <div className="offer__content__title">{this.props.offer.title}</div>
+                    {this.props.offer.description &&
+                        <div className="offer__content__excerpt">{this.props.offer.description}</div>
+                    }
+                    <div className="offer__content__caracteristics">
+                        {this.props.offer.price &&
+                            <div className="offer__content__caracteristics__item">Prix : {this.props.offer.price} €</div>
+                        }
+                        {this.props.offer.promo &&
+                            <div className="offer__content__caracteristics__item">Code promotionnel :{this.props.offer.promo}</div>
+                        }
+                        {this.props.offer.date_start &&
+                            <div className="offer__content__caracteristics__item">Début : {this.props.offer.date_start}</div>
+                        }
+                        {this.props.offer.date_end &&
+                            <div className="offer__content__caracteristics__item">Fin : {this.props.offer.date_end}</div>
+                        }
+                        {this.props.offer.operator &&
+                            <div className="offer__content__caracteristics__item">Opérateur : {this.props.offer.operator}</div>
+                        }
+                        {this.props.offer.data &&
+                            <div className="offer__content__caracteristics__item">Data : {this.props.offer.data} Go</div>
+                        }
+                        {this.props.offer.commitment && this.props.offer.commitment === "0" ?
+                            <div className="offer__content__caracteristics__item">Sans engagement</div>
+                            :
+                            <div className="offer__content__caracteristics__item">Engagement : {this.props.offer.commitment} mois</div>
+                        }
+                        {this.props.offer.phone && this.props.offer.phone=== "true" ?
+                            <div className="offer__content__caracteristics__item">Avec téléphone</div>
+                            :
+                            <div className="offer__content__caracteristics__item">Sans téléphone</div>
+                        }
+                        {this.props.offer.calls&& this.props.offer.calls === "0" ?
+                            <div className="offer__content__caracteristics__item">Appels illimités</div>
+                            :
+                            <div className="offer__content__caracteristics__item">Appels : {this.props.offer.calls} mois</div>
+                        }
+                        {this.props.offer.foreign && this.props.offer.foreign === "true" ?
+                            <div className="offer__content__caracteristics__item">Appels à l'étranger</div>
+                            :
+                            <div className="offer__content__caracteristics__item">Sans appels à l'étranger</div>
+                        }
+                    </div>
                 </div>
                 {this.props.offer.link &&
                     <div className="offer__more">

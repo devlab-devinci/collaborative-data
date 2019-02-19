@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import "./UserList.scss";
+
 import {Link} from "react-router-dom";
 
 import {withFirebase} from "../Firebase";
@@ -41,46 +43,45 @@ class UserList extends Component {
         const {users, loading} = this.state;
 
         return (
-            <div>
-                <h1>Liste des utilisateurs :</h1>
+            <div className="user-list">
+                <h1 className="user-list__title">Liste des utilisateurs</h1>
                 {loading ?
                     <div>Loading ...</div>
                     :
-                    <table className="table table-sm">
+                    <table className="user-list__table">
                         <thead>
-                        <tr>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Pseudo</th>
-                            <th scope="col">Admin</th>
-                            <th scope="col">Contributeur</th>
-                            <th scope="col">Détails</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Pseudo</th>
+                                <th scope="col">Admin</th>
+                                <th scope="col">Contributeur</th>
+                                <th scope="col">Détails</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {users.map(user => (
-                            <tr
-                                key={user.uid}>
-                                <td>{user.email}</td>
-                                <td>{user.username}</td>
-                                <td>
-                                    {user.admin ?
-                                        <strong>Oui</strong>
-                                        :
-                                        <strong>Non</strong>
-                                    }
-                                </td>
-                                <td>{user.contributor}</td>
-                                <td><Link
-                                    to={{
-                                        pathname: `${ROUTES.USERS}/${user.uid}`,
-                                        state: {user},
-                                    }}
-                                >
-                                    Details
-                                </Link>
-                                </td>
-                            </tr>
-                        ))}
+                            {users.map(user => (
+                                <tr key={user.uid}>
+                                    <td>{user.email}</td>
+                                    <td>{user.username}</td>
+                                    <td>
+                                        {user.admin ?
+                                            <strong>Oui</strong>
+                                            :
+                                            <strong>Non</strong>
+                                        }
+                                    </td>
+                                    <td>{user.contributor}</td>
+                                    <td><Link
+                                        to={{
+                                            pathname: `${ROUTES.USERS}/${user.uid}`,
+                                            state: {user},
+                                        }}
+                                    >
+                                        Details
+                                    </Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 }

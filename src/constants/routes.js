@@ -4,6 +4,7 @@ export const SIGN_OUT = "/signout";
 export const SIGN_IN = "/signin";
 
 // CLASSICAL PAGES
+export const ABOUT = "/about";
 export const TERMS = "/terms";
 export const PRIVACY = "/privacy-policy";
 

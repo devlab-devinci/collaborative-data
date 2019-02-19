@@ -7,10 +7,10 @@ const Privacy = () => (
     <div className="privacy">
         <Container>
             <div className="privacy__content">
-                <div className="terms__content__title">
+                <div className="privacy__content__title">
                     Politique de confidentialité
                 </div>
-                <div className="ptivacy__content__text">
+                <div className="privacy__content__text">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquet rhoncus mauris, vitae egestas purus viverra at. Etiam pretium facilisis accumsan. Nunc in est quis eros sodales aliquet vel vitae nisi. Aenean non efficitur mi, eget bibendum mi. Nam a malesuada diam, sit amet rutrum nisl. Phasellus eget sem ac mauris auctor porttitor. In pharetra ante nec purus volutpat, at venenatis dolor hendrerit. Donec viverra ex congue, ultricies ligula in, pharetra massa. Donec arcu lorem, commodo non pulvinar in, lacinia eget massa. Quisque cursus, diam quis auctor imperdiet, orci nulla eleifend neque, quis imperdiet lorem nisl non turpis. Donec a commodo massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
 
                     <p>Nulla interdum viverra tellus a lacinia. Curabitur mollis risus nec ante dignissim placerat. Nullam molestie enim sit amet iaculis mattis. Nam convallis consectetur mauris eget ullamcorper. Sed sit amet accumsan diam. Ut facilisis ac justo vel consectetur. Duis sapien mi, hendrerit sed ipsum egestas, lacinia placerat est. Quisque id enim arcu. Nulla facilisi. Nullam porta turpis erat, sed viverra magna euismod eu. Mauris tempus blandit aliquet. Vivamus tristique leo velit, non suscipit libero porta a. Nam sit amet tincidunt dolor. Vestibulum faucibus scelerisque hendrerit. Donec a tortor sit amet odio rhoncus faucibus.</p>

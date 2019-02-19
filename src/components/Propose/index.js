@@ -11,7 +11,7 @@ import {
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import Mobile from './mobile';
-import {Container} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 import Button from "react-bootstrap/es/Button";
 
 const ProposePage = () => (
@@ -21,14 +21,19 @@ const ProposePage = () => (
                 {authUser =>
                     authUser ?
                         authUser.contributor === 'accepted' ? (
-                            <div>
-                                <h1>Proposer une offre</h1>
+                            <div className="propose__content">
+                                <h1 className="propose__content__title">Proposer une offre</h1>
                                 <ProposeForm authUser={authUser}/>
                             </div>
                         ) : (
-                            <h1 className='text-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
+                          <div className="propose__content">
+                              <h1 className='propose__content__title-center'><Link to={ROUTES.ACCOUNT}>Devenez contributeur pour poster une offre !</Link></h1>
+                          </div>
+                        ) : (
+                          <div className="propose__content">
+                              <h1 className='text-propose__content__title'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
+                          </div>
                         )
-                        : <h1 className='text-center'><Link to={ROUTES.SIGN_UP}>Inscrivez-vous pour poster une offre !</Link></h1>
                 }
             </AuthUserContext.Consumer>
         </Container>
@@ -108,128 +113,121 @@ class ProposeFormBase extends Component {
                     foreign : "true"
                 }}
                 render={({ submitError, handleSubmit, reset, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit}>
-                        <h3> 1) Dis-nous en plus sur l'offre :</h3>
+                    <form onSubmit={handleSubmit} className="propose__form">
 
-                        <Field name="title">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Titre *
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="text" placeholder="Titre" className="form-control" />
+                        <div className="propose__form__content">
+                            <div className="propose__form__section">
+                                <h3 className="propose__form__section__title">Dite-nous en plus sur l'offre</h3>
 
-                                </div>
-                            )}
-                        </Field>
+                                <Row>
+                                    <Field name="title">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Titre *</label>
+                                                <input {...input} type="text" className="propose__form__input" />
+                                                { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                            </div>
+                                        )}
+                                    </Field>
 
-                        <Field name="price">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Prix  *
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="text" placeholder="Prix" className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                    <Field name="price">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Prix *</label>
+                                                <input {...input} type="text" className="propose__form__input" />
+                                                { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                            </div>
+                                        )}
+                                    </Field>
+                                </Row>
 
-                        <Field name="link">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Lien
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="text" placeholder="Lien" className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                <Row>
+                                    <Field name="date_start">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Date de début</label>
+                                                <input {...input} type="date" className="propose__form__input" />
+                                                { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                            </div>
+                                        )}
+                                    </Field>
 
-                        <Field name="promo">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Code promotionnel
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="text" placeholder="Code promotionnel" className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                    <Field name="date_end">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Date de fin</label>
+                                                <input {...input} type="date" className="propose__form__input" />
+                                                { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                            </div>
+                                        )}
+                                    </Field>
+                                </Row>
 
-                        <Field name="description" component="textarea">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Description
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <textarea {...input} placeholder="Description" className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                <Row>
+                                    <Field name="link">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Lien</label>
+                                                <input {...input} type="text" className="propose__form__input" />
+                                                { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                            </div>
+                                        )}
+                                    </Field>
 
-                        <Field name="date_start">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Date de début
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="date" placeholder="Date de début "
-                                           className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                    <Field name="promo">
+                                        {({ input, meta }) => (
+                                            <div className="col-md-6 form-group">
+                                                <label className="propose__form__label">Code promotionnel</label>
+                                                <input {...input} type="text" className="propose__form__input" />
 
-                        <Field name="date_end">
-                            {({ input, meta }) => (
-                                <div className='form-group'>
-                                    <label>Date de fin
-                                        {(meta.error || meta.submitError) && meta.touched &&
-                                        <span className='error'>{meta.error || meta.submitError}
-                                        </span>}
-                                    </label>
-                                    <input {...input} type="date" placeholder="Date de fin"
-                                           className="form-control" />
-                                </div>
-                            )}
-                        </Field>
+                                            </div>
+                                        )}
+                                    </Field>
+                                </Row>
 
-                        <h3>2) Sélectionne un type d'offre :</h3>
+                                <Field name="description" component="textarea">
+                                    {({ input, meta }) => (
+                                        <div className='form-group'>
+                                            <label className="propose__form__label">Description</label>
+                                            <textarea {...input} className="propose__form__textarea" />
+                                            { (meta.error || meta.submitError) && meta.touched && <span className="propose__form__error">{meta.error || meta.submitError}</span> }
+                                        </div>
+                                    )}
+                                </Field>
 
-                        <div className='form-group'>
-                            <label>Type d'offre *</label>
-                            <Field name="category" component="select" className="form-control">
-                                <option value="mobile" >Mobile</option>
-                                <option value="internet">Internet</option>
-                                <option value="gas">Gaz</option>
-                                <option value="electricity">Électricité</option>
-                                <option value="medias">Médias</option>
-                            </Field>
-                        </div>
+                            </div>
 
-                        <h3>3) Définis les critères de l'offre :</h3>
-                        {values.category === 'mobile' &&
-                        <Mobile/>
-                        }
-                        <p>Les champs obligatoires sont signalés par un astérix</p>
+                            <p className="propose__form__required__label">Les champs obligatoires sont signalés par un astérix</p>
 
-                        {submitError && <div className="error">{submitError}</div>}
-                        <div className="buttons">
-                            <Button type="submit" disabled={submitting} className="mb-5 btn-custom">
-                                Valider
+                            {submitError && <div className="propose__form__error">{submitError}</div>}
+
+                            <Button type="submit" disabled={submitting} className="propose__form__btn">
+                                Sauvegarder
                             </Button>
                         </div>
+
+                        <div className="propose__form__sidebar">
+                            <div className="propose__form__section">
+                                <h3 className="propose__form__section__title">Sélectionne un type d'offre</h3>
+                                <div className='form-group'>
+                                    <label className="propose__form__label">Type d'offre *</label>
+                                    <Field name="category" component="select" className="form-control">
+                                        <option value="mobile" >Mobile</option>
+                                        <option value="internet">Internet</option>
+                                        <option value="gas">Gaz</option>
+                                        <option value="electricity">Électricité</option>
+                                        <option value="medias">Médias</option>
+                                    </Field>
+                                </div>
+                            </div>
+                            <div className="propose__form__section">
+                                <h3 className="propose__form__section__title">Définis les critères de l'offre</h3>
+                                { values.category === 'mobile' && <Mobile/> }
+                            </div>
+
+                        </div>
+
+
                     </form>
                 )}
             />

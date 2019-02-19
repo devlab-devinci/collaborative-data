@@ -37,6 +37,11 @@
             &__link {
                 color: #0AC7B7;
                 padding: 2px 10px;
+                &.logout {
+                    border-top: 1px solid #EDEDED;
+                    padding-top: 5px;
+                    margin-top: 5px;
+                }
             }
             &__admin {
                 display: flex;

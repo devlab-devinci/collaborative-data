@@ -41,7 +41,9 @@ const AccountPage = () => (
         <div className="account">
           <Container>
             <div className="account__sidebar">
-                <div className="account__sidebar__avatar"></div>
+                <div className="account__sidebar__avatar">
+                    <img src="http://placehold.it/200x200" alt={"avatar de " + authUser.username} />
+                </div>
                 <div className="account__sidebar__username">{authUser.username},</div>
                 <div className="account__sidebar__role">{authUser.contributor ? authUser.admin ? "Administrateur" : "Contributeur" : "Utilisateur"}</div>
                 <nav className="account__sidebar__nav">

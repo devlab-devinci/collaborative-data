@@ -1,0 +1,26 @@
+.user-list {
+    min-height: calc(100vh - 138px);
+    &__title {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    &__table {
+        width: 100%;
+        tr {
+            border-bottom: 1px solid #0AC7B7;
+        }
+        th {
+            padding: 10px 0;
+            background: #0AC7B7;
+            color: #FFF;
+            padding: 15px 10px;
+            font-size: 1.15em;
+        }
+        td {
+            padding: 15px 10px;
+            font-size: 1.15em;
+        }
+    }
+}
